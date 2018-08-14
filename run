@@ -1,0 +1,150 @@
+#!/bin/bash
+
+# Fatorial 2^k install script for Ubuntu 18.04.1 Server LTS (Bionic Beaver)
+# Emerson Barea (emerson.barea@gmail.com)
+
+# Fail on error
+#set -e
+
+function welcome() {
+    printf '\n%s\n' 'This script creates the complete environment for Factorial 2^k experiments.
+                   Some requirements must be met:
+                   - Ubuntu 18.04.1 Server LTS (Bionic Beaver)
+                   - 2 NICs (1 for administration and 2 for communication between cluster nodes)
+                   - Internet access
+                   - Initial user with "sudo" rights
+                   Note: the user "mininet" will be created, so it should not exist previously.'
+}
+
+function qtd_hosts() {
+    printf '\n%s' 'Answer: how many cluster nodes will be created? (only number. Ex.: 10): '
+    read qtd_hosts
+
+    # testing if "qtd_hosts" is a number
+    re='^[0-9]+$'
+    if ! [[ $qtd_hosts =~ $re ]] ; then
+        printf '\e[1;31m%-6s\e[m' 'error: Write only numbers'
+        qtd_hosts;
+    fi
+}
+
+#function note() {
+#    printf '\n\e[1;32m%-6s\e[m\n' 'Note: At the end of the installation, this machine will be renamed to "node1".'
+#}
+
+function update_SO_install_packages() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Initiating SO update and package install...'
+    printf '\e[1;33m%-6s\e[m\n' 'Please, confirm if you computer has internet connectivity.'
+    apt update
+    apt install language-pack-pt -y
+    apt upgrade -y
+    apt install git vim htop ethtool sysfsutils python-pip python3-pip ifupdown mc strace tcpdump netcat nmap python-scapy whois -y
+}
+
+function network_configuration() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Configuring network interface...'
+    printf '\e[1;33m%-6s\e[m\n' 'Removing Netplan, erasing any previus configuration and renaming NIC interfaces to "eth0" and "eth1".'
+    apt autoremove netplan netplan.io nplan -y
+    sed -i -- 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub
+    grub-mkconfig -o /boot/grub/grub.cfg
+    printf '\e[1;33m%-6s\e[m\n' 'eth0 will be configured to DHCP client after reboot'
+    echo $'auto lo\niface lo inet loopback\n\nallow-hotplug eth0\niface eth0 inet dhcp' > /etc/network/interfaces
+    printf '\n%s\n' 'showing /etc/network/interfaces'
+    cat /etc/network/interfaces
+}
+
+function user() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Creating "mininet" user...'
+    printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous "mininet" user data.'
+    userdel -r mininet											# apaga usuario mininet previamente cadastrado
+    useradd -m -p $(mkpasswd -m sha-512 -S saltsalt -s <<< abc123) -s /bin/bash mininet			# cria usuario mininet
+    printf '\e[1;32m%-6s\e[m\n' 'USERNAME:mininet'
+    printf '\e[1;32m%-6s\e[m\n' 'PASSWORD:abc123'
+    printf '\e[1;33m%-6s\e[m\n' 'Putting user "mininet" to sudoers'
+    echo 'mininet     ALL=NOPASSWD: ALL' >> /etc/sudoers						# coloca usuario mininet no sudo
+    
+}
+
+function hosts_file() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Creating "hosts" file...'
+    sed -i -- 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.cfg		# tornando hostname configurado pelo usuário permanente
+    printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
+    cp /dev/null /etc/hosts										# limpa arquivo hosts
+    echo 127.0.0.1	localhost.localdomain	localhost > /etc/hosts					# cadastra loopback no arquivo hosts
+    for ((i=1; i<=$qtd_hosts; i++)); do echo 10.0.0.$i    node$i >> /etc/hosts; done
+    printf '\n%s\n' 'showing /etc/hosts'
+    cat /etc/hosts
+}
+
+function ssh_file() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Configuring SSH...'
+    sed -i -- 's/#AllowAgentForwarding yes/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
+    sed -i -- 's/#AllowTcpForwarding yes/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
+    sed -i -- 's/#PermitTunnel no/PermitTunnel yes/g' /etc/ssh/sshd_config
+    
+    printf '\n\e[1;33m%-6s\e[m\n' 'Creating and exchanging SSH key for "mininet" user'
+    sudo -u mininet ssh-keygen -t rsa -N "" -f /home/mininet/.ssh/id_rsa               			# gerando a chave ssh do usuário mininet
+
+    printf '\n\e[1;33m%-6s\e[m\n' 'Adding the mininet user key in the authorized_keys'
+    for (( c=1; c<=$qtd_hosts; c++ )); do sudo -u mininet cat /home/mininet/.ssh/id_rsa.pub | \
+          sudo -u mininet tee --append /home/mininet/.ssh/authorized_keys; done                        	# adicionando a chave do usuário mininet no authorized_keys (qtd_hosts)
+
+    printf '\n\e[1;33m%-6s\e[m\n' 'Changing hostnames keys in authorized_keys'
+    for i in $(cat -n /home/mininet/.ssh/authorized_keys | awk '{print $1}'); \
+          do sed -Ei "${i}s/@.*/@node$i/" /home/mininet/.ssh/authorized_keys; done            		# mudando todos nomes de hosts do arquivo para "node" para facilitar modificação abaixo
+
+    sudo -u mininet chmod 755 /home/mininet/.ssh/authorized_keys
+    echo $'Host *\nStrictHostKeyChecking no' | sudo -u mininet tee --append /home/mininet/.ssh/config   # configurando ssh para não verificar fingerprint
+    sudo -u mininet chmod 400 /home/mininet/.ssh/config
+    printf '\n%s\n' 'showing /home/mininet/.ssh/authorized_keys'
+    cat /home/mininet/.ssh/authorized_keys
+}
+
+function node_file() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Creating configuration file for all cluster nodes...'
+    rm node*.sh												# apagando os arquivos de configuracao previos
+    for ((i=1; i<=$qtd_hosts; i++)); do echo "hostnamectl set-hostname node"$i"; echo \
+          '\nallow-hotplug eth1\niface eth1 inet static\naddress 10.0.0.$i\nnetmask 255.255.255.0' \
+          >> /etc/network/interfaces" >> node$i.sh; chmod 755 node$i.sh; done
+    printf '\n%s\n' 'showing nodes file'
+    cat node*.sh
+}
+
+function install_mininet() {
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Installing Mininet 2.2.2...'
+    cd /usr/src
+    git clone git://github.com/mininet/mininet
+    cd mininet
+    git tag
+    git checkout -b 2.2.2 2.2.2
+    cd ..
+    printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
+    sed -i -- 's/iproute/iproute2/g' /usr/src/mininet/util/install.sh
+    mininet/util/install.sh -a
+    printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
+    mn --test pingall
+}
+
+
+# instalando o Network Prototype Simulator (NPS)
+
+###cd /usr/src
+###git clone git://github.com/ARCCN/nps
+###cp nps/config/services.py /usr/src/mininet/mininet
+###cp nps/config/services.py /usr/src/mininet/build/lib.linux-x86_64-2.7/mininet
+
+###apt install python-networkx python-matplotlib python-paramiko -y
+###apt install cmake default-jdk git ant libgl1-mesa-dev freeglut3-dev libgstreamer1.0-dev libgstreamermm-1.0-dev libwebkitgtk-dev -y
+###apt autoremove -y
+
+
+welcome;
+qtd_hosts;
+#note;
+update_SO_install_packages;
+network_configuration;
+user;
+hosts_file;
+ssh_file;
+node_file;
+install_mininet;
