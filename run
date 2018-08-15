@@ -27,7 +27,7 @@ function qtd_hosts() {
 
 function install_packages() {
     function app_nps() {
-        printf '\n%s' 'Network Prototype Simulator (NPS) [y/n]: '
+        printf '\n%s' '- Network Prototype Simulator (NPS) [y/n]: '
         read var_app_nps
 
         # testing if "var_app_nps" is y or n
@@ -38,7 +38,7 @@ function install_packages() {
         fi
     }
     function app_maxinet() {
-        printf '\n%s' 'MaxiNet [y/n]: '
+        printf '%s' '- MaxiNet [y/n]: '
         read var_app_maxinet
 
         # testing if "app_maxinet" is y or n
@@ -123,6 +123,7 @@ function ssh_file() {
 
 function node_file() {
     printf '\n\e[1;33m%-6s\e[m\n' '-- Creating configuration file for all cluster nodes...'
+    printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     rm -rf $FACTORIAL2K_DIR/nodes									# apagando os arquivos de configuracao previos
     mkdir -p $FACTORIAL2K_DIR/nodes
     for ((i=1; i<=$var_qtd_hosts; i++)); do echo "hostnamectl set-hostname node"$i"; echo \
@@ -134,12 +135,15 @@ function node_file() {
 
 function install_mininet() {
     printf '\n\e[1;33m%-6s\e[m\n' '-- Installing Mininet 2.2.2...'
-    git clone git://github.com/mininet/mininet $BUILD_DIR
+    printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
+    rm -rf $BUILD_DIR/mininet
+    printf '\e[1;33m%-6s%s\e[m\n' 'Installing Mininet in ' $BUILD_DIR/mininet
+    git clone git://github.com/mininet/mininet $BUILD_DIR/mininet
     cd $BUILD_DIR/mininet
     git tag
     git checkout -b 2.2.2 2.2.2
     printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
-    sed -i -- 's/iproute/iproute2/g' /usr/src/mininet/util/install.sh
+    sed -i -- 's/iproute/iproute2/g' $BUILD_DIR/mininet/util/install.sh
     $BUILD_DIR/mininet/util/install.sh -a
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     mn --test pingall
@@ -151,15 +155,17 @@ function install_app_nps() {
     apt install python-networkx python-matplotlib python-paramiko -y
     apt install cmake default-jdk git ant libgl1-mesa-dev freeglut3-dev libgstreamer1.0-dev libgstreamermm-1.0-dev libwebkitgtk-dev -y
     apt autoremove -y
-    printf '\n\e[1;33m%-6s\e[m\n' 'Installing NPS in /usr/src/nps'
-    git clone git://github.com/ARCCN/nps $BUILD_DIR
-    cp $BUILD_DIR/nps/config/services.py $BUILD_DIR/mininet/mininet
+    printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
+    rm -rf $BUILD_DIR/nps
+    printf '\e[1;33m%-6s%s\e[m\n' 'Installing NPS in ' $BUILD_DIR/nps
+    git clone git://github.com/ARCCN/nps $BUILD_DIR/nps
+    cp $BUILD_DIR/nps/config/services.py $BUILD_DIR/mininet
     cp $BUILD_DIR/nps/config/services.py $BUILD_DIR/mininet/build/lib.linux-x86_64-2.7/mininet
 }
 
 # set up build directory
-BUILD_DIR='/home/mininet/'
-FACTORIAL2K_DIR=$BUILD_DIR/factorial2k/
+BUILD_DIR=/home/mininet
+FACTORIAL2K_DIR=$BUILD_DIR/factorial2k
 
 welcome;
 qtd_hosts;
@@ -187,8 +193,9 @@ if [ "$var_app_maxinet" = "Y" ] || [ "$var_app_maxinet" = "y" ] ; then
     printf '%s\n' ' - MaxiNet'
 fi
 printf '\n%s\n' 'All programs were installed in '$BUILD_DIR
-printf '\e[1;32m%-6s\e[m\n' 'USERNAME: mininet' \
-                            'PASSWORD: abc123'
-printf '\n%s%d%s\n%s%s%s\n%s\n' 'Please, shutdown the machine, make ' $((var_qtd_hosts-1)) ' clones, restart all of them, ' \
-                                'execute nodes configuration script stored in ' $FACTORIAL2K_DIR 'nodes/ (node1.sh, node2.sh ...) ' \
-                                'at the correspondent clone to finished network configuration.'
+printf '\n\e[1;32m%-6s\n%s\n%s\e[m\n' 'From now you need to use only the username and password below:' \
+                                    'USERNAME: mininet' \
+                                    'PASSWORD: abc123'
+printf '\n%s%d%s\n%s%s%s\n%s\n' 'Please, shutdown the VM, make ' $((var_qtd_hosts-1)) ' clones, start all of them, ' \
+                                'execute nodes configuration script stored in ' $FACTORIAL2K_DIR '/nodes/ (node1.sh, node2.sh ...) ' \
+                                'at the correspondent VM (clone) to finish network configuration.'
