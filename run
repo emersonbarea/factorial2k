@@ -177,8 +177,8 @@ fi
 
 printf '\n\e[1;32m%-6s\e[m\n' ' ------------ FINISHED ------------ '
 printf '\n%s\n' 'Please, look for any trouble during installation process.' \
-                      'You requested installation of the following applications:' \
-		      ' - Mininet 2.2.2'
+                'You requested installation of the following applications:' \
+	        ' - Mininet 2.2.2'
 if [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
     printf '%s\n' ' - Network Prototype Simulator (NPS)'
 fi
@@ -186,3 +186,9 @@ fi
 if [ "$var_app_maxinet" = "Y" ] || [ "$var_app_maxinet" = "y" ] ; then
     printf '%s\n' ' - MaxiNet'
 fi
+printf '\n%s\n' 'All programs were installed in '$BUILD_DIR
+printf '\e[1;32m%-6s\e[m\n' 'USERNAME: mininet' \
+                            'PASSWORD: abc123'
+printf '\n%s%d%s\n%s%s%s\n%s\n' 'Please, shutdown the machine, make ' $((var_qtd_hosts-1)) ' clones, restart all of them, ' \
+                                'execute nodes configuration script stored in ' $FACTORIAL2K_DIR 'nodes/ (node1.sh, node2.sh ...) ' \
+                                'at the correspondent clone to finished network configuration.'
