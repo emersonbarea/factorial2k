@@ -5,7 +5,7 @@ git clone https://github.com/emersonbarea/factorial2k.git
 
 chmod 755 factorial2k/run
 
-cd fatorial2k
+cd factorial2k
 
 sudo ./run
 ```
