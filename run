@@ -218,7 +218,7 @@ function install_app_maxinet() {
     git checkout v1.2
     make install
     cp $BUILD_DIR/MaxiNet/share/MaxiNet-cfg-sample /etc/MaxiNet.cfg
-
+    printf '\e[1;33m%-6s\e[m\n' 'Configuring MaxiNet config file.'
     sed -i -- 's/password = HalloWelt/password = abc123/g' /etc/MaxiNet.cfg
     sed -i -- 's/controller = 192.168.123.1:6633/controller = node1:6633/g' /etc/MaxiNet.cfg
     sed -i -- 's/logLevel = INFO/logLevel = ERROR/g' /etc/MaxiNet.cfg
@@ -227,6 +227,7 @@ function install_app_maxinet() {
     sed -i -- 's/ip = 192.168.123.1/ip = node1/g' /etc/MaxiNet.cfg
     sed -i -- 19,'$d' /etc/MaxiNet.cfg
     for ((i=2; i<=$var_qtd_hosts; i++)); do echo '[node'$i$'] \nip = node'$i$' \nshare = 1\n' >> /etc/MaxiNet.cfg; done
+    cat /etc/MaxiNet.cfg    
 }
 
 # set up build directory
