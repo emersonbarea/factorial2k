@@ -14,7 +14,7 @@ function welcome() {
 }
 
 function qtd_hosts() {
-    printf '\n%s' 'Answer: how many cluster nodes will be created? (only number. Ex.: 10): '
+    printf '\n%s' 'Answer: how many cluster nodes will be created? (only number. Ex.: 3): '
     read var_qtd_hosts
 
     # testing if "var_qtd_hosts" is a number
@@ -26,8 +26,19 @@ function qtd_hosts() {
 }
 
 function install_packages() {
+    function app_mininet() {
+        printf '\n%s' '- Mininet ([y]/n): '
+        read var_app_mininet
+
+        # testing if "var_app_mininet" is y or n
+        if [ "$var_app_mininet" != "" ] && [ "$var_app_mininet" != "Y" ] && [ "$var_app_mininet" != "y" ] \
+        && [ "$var_app_mininet" != "N" ] && [ "$var_app_mininet" != "n" ]; then
+            printf '\e[1;31m%-6s\e[m' 'error: Press only Y|y or N|n'
+            app_mininet;
+        fi
+    }
     function app_nps() {
-        printf '\n%s' '- Network Prototype Simulator (NPS) ([y]/n): '
+        printf '%s' '- Network Prototype Simulator (NPS) ([y]/n): '
         read var_app_nps
 
         # testing if "var_app_nps" is y or n
@@ -49,6 +60,7 @@ function install_packages() {
         fi
     }
     printf '\n%s' 'What application do you want to install?'
+    app_mininet;
     app_nps;
     app_maxinet;
 }
@@ -190,6 +202,9 @@ function install_app_nps() {
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating clusternode MininetScripts directory in ' $BUILD_DIR/nps/clusternode/MininetScripts/
     mkdir -p $BUILD_DIR/nps/clusternode/MininetScripts/
+
+# AINDA NÃO TERMINADO
+
 }
 
 function install_app_maxinet() {
@@ -202,6 +217,11 @@ function install_app_maxinet() {
     cd $BUILD_DIR/MaxiNet
     git checkout v1.2
     make install
+
+
+
+
+
 }
 
 # set up build directory
@@ -217,11 +237,13 @@ user;
 hosts_file;
 ssh_file;
 node_file;
-install_mininet;
-if [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
+if [ "$var_app_mininet" != "" ] || [ "$var_app_mininet" = "Y" ] || [ "$var_app_mininet" = "y" ] ; then
+    install_mininet;;
+fi
+if [ "$var_app_nps" != "" ] || [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
     install_app_nps;
 fi
-if [ "$var_app_maxinet" = "Y" ] || [ "$var_app_maxinet" = "y" ] ; then
+if [ "$var_app_maxinet" != "" ] || [ "$var_app_maxinet" = "Y" ] || [ "$var_app_maxinet" = "y" ] ; then
     install_app_maxinet;
 fi
 
