@@ -7,5 +7,5 @@ chmod 755 factorial2k/run
 
 cd factorial2k
 
-sudo ./run
+sudo ./install.sh
 ```
