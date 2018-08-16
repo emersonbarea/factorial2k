@@ -140,7 +140,7 @@ function node_file() {
     mkdir -p $FACTORIAL2K_DIR/nodes
     for ((i=1; i<=$var_qtd_hosts; i++)); do echo "hostnamectl set-hostname node"$i"; echo \
           '\nallow-hotplug eth1\niface eth1 inet static\naddress 10.0.0.$i\nnetmask 255.255.255.0' \
-          >> /etc/network/interfaces" >> $FACTORIAL2K_DIR/nodes/node$i.sh; chmod 755 $FACTORIAL2K_DIR/nodes/node$i.sh; done
+          >> /etc/network/interfaces; reboot" >> $FACTORIAL2K_DIR/nodes/node$i.sh; chmod 755 $FACTORIAL2K_DIR/nodes/node$i.sh; done
     printf '\n%s\n' 'showing nodes file'
     cat $FACTORIAL2K_DIR/nodes/node*.sh
 }
@@ -258,7 +258,7 @@ printf '\n%s\n' 'Please, look for any trouble during installation process.' \
                 'You requested installation of the following applications:' \
 	        
 if [ "$var_app_mininet" = "" ] || [ "$var_app_mininet" = "Y" ] || [ "$var_app_mininet" = "y" ] ; then
-    printf '%s\n' ' - Mininet 2.2.2'
+    printf '%s\n%s\n' ' - Mininet 2.2.2' ' - Mininet Cluster'
 fi
 if [ "$var_app_nps" = "" ] || [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
     printf '%s\n' ' - Network Prototype Simulator (NPS)'
