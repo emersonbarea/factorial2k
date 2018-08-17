@@ -104,7 +104,8 @@ function hosts_file() {
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     cp /dev/null /etc/hosts										# limpa arquivo hosts
     echo 127.0.0.1	localhost.localdomain	localhost > /etc/hosts					# cadastra loopback no arquivo hosts
-    for ((i=1; i<=$var_qtd_hosts; i++)); do echo 10.0.0.$i    node$i >> /etc/hosts; done
+    for ((i=1; i<=$var_qtd_hosts; i++)); do 
+        echo 10.0.0.$i    node$i >> /etc/hosts; done
     printf '\n%s\n' 'showing /etc/hosts'
     cat /etc/hosts
 }
@@ -119,12 +120,13 @@ function ssh_file() {
     sudo -u mininet ssh-keygen -t rsa -N "" -f /home/mininet/.ssh/id_rsa               			# gerando a chave ssh do usuário mininet
 
     printf '\n\e[1;33m%-6s\e[m\n' 'Adding the mininet user key in the authorized_keys'
-    for (( c=1; c<=$var_qtd_hosts; c++ )); do sudo -u mininet cat /home/mininet/.ssh/id_rsa.pub | \
-          sudo -u mininet tee --append /home/mininet/.ssh/authorized_keys; done                        	# adicionando a chave do usuário mininet no authorized_keys (var_qtd_hosts)
+    for (( c=1; c<=$var_qtd_hosts; c++ )); do
+        sudo -u mininet cat /home/mininet/.ssh/id_rsa.pub | \
+        sudo -u mininet tee --append /home/mininet/.ssh/authorized_keys; done                        	# adicionando a chave do usuário mininet no authorized_keys (var_qtd_hosts)
 
     printf '\n\e[1;33m%-6s\e[m\n' 'Changing hostnames keys in authorized_keys'
-    for i in $(cat -n /home/mininet/.ssh/authorized_keys | awk '{print $1}'); \
-          do sed -Ei "${i}s/@.*/@node$i/" /home/mininet/.ssh/authorized_keys; done            		# mudando todos nomes de hosts do arquivo para "node" para facilitar modificação abaixo
+    for i in $(cat -n /home/mininet/.ssh/authorized_keys | awk '{print $1}'); do
+        sed -Ei "${i}s/@.*/@node$i/" /home/mininet/.ssh/authorized_keys; done            		# mudando todos nomes de hosts do arquivo para "node" para facilitar modificação abaixo
 
     sudo -u mininet chmod 755 /home/mininet/.ssh/authorized_keys
     echo $'Host *\nStrictHostKeyChecking no' | sudo -u mininet tee --append /home/mininet/.ssh/config   # configurando ssh para não verificar fingerprint
@@ -138,9 +140,9 @@ function node_file() {
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     rm -rf $FACTORIAL2K_DIR/nodes									# apagando os arquivos de configuracao previos
     mkdir -p $FACTORIAL2K_DIR/nodes
-    for ((i=1; i<=$var_qtd_hosts; i++)); do echo "hostnamectl set-hostname node"$i"; echo \
-          '\nallow-hotplug eth1\niface eth1 inet static\naddress 10.0.0.$i\nnetmask 255.255.255.0' \
-          >> /etc/network/interfaces; reboot" >> $FACTORIAL2K_DIR/nodes/node$i.sh; chmod 755 $FACTORIAL2K_DIR/nodes/node$i.sh; done
+    for ((i=1; i<=$var_qtd_hosts; i++)); do
+        cp $LOCAL_DIR/template_node.sh $FACTORIAL2K_DIR/nodes/node$i.sh;
+        sed -i -- 's/<node_number>/'$i'/g' $FACTORIAL2K_DIR/nodes/node$i.sh; done
     printf '\n%s\n' 'showing nodes file'
     cat $FACTORIAL2K_DIR/nodes/node*.sh
 }
@@ -226,11 +228,13 @@ function install_app_maxinet() {
     sed -i -- 's/usesudo = False/usesudo = True/g' /etc/MaxiNet.cfg
     sed -i -- 's/ip = 192.168.123.1/ip = node1/g' /etc/MaxiNet.cfg
     sed -i -- 19,'$d' /etc/MaxiNet.cfg
-    for ((i=2; i<=$var_qtd_hosts; i++)); do echo '[node'$i$'] \nip = node'$i$' \nshare = 1\n' >> /etc/MaxiNet.cfg; done
+    for ((i=2; i<=$var_qtd_hosts; i++)); do 
+        echo '[node'$i$'] \nip = node'$i$' \nshare = 1\n' >> /etc/MaxiNet.cfg; done
     cat /etc/MaxiNet.cfg    
 }
 
 # set up build directory
+LOCAL_DIR=$(pwd)
 BUILD_DIR=/home/mininet
 FACTORIAL2K_DIR=$BUILD_DIR/factorial2k
 
