@@ -143,7 +143,7 @@ function node_file() {
     for ((i=1; i<=$var_qtd_hosts; i++)); do
         cp $LOCAL_DIR/template_node.sh $FACTORIAL2K_DIR/nodes/node$i.sh;
         sed -i -- 's/<node_number>/'$i'/g' $FACTORIAL2K_DIR/nodes/node$i.sh;
-	chmod 755 $FACTORIAL2K_DIR/nodes/node$i.sh done
+        chmod 755 $FACTORIAL2K_DIR/nodes/node$i.sh done
     printf '\n%s\n' 'showing nodes file'
     cat $FACTORIAL2K_DIR/nodes/node*.sh
 }
