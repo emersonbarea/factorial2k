@@ -82,8 +82,6 @@ function network_configuration() {
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     printf '\e[1;33m%-6s\e[m\n' 'eth0 will be configured to DHCP client after reboot'
     printf '%s\n' $'auto lo\niface lo inet loopback\n\nallow-hotplug eth0\niface eth0 inet dhcp' | sudo tee /etc/network/interfaces
-    printf '\n%s\n' 'showing /etc/network/interfaces'
-    cat /etc/network/interfaces
 }
 
 function user() {
@@ -106,8 +104,6 @@ function hosts_file() {
     printf '%s\n' "127.0.0.1	localhost.localdomain	localhost" | sudo tee /etc/hosts		# cadastra loopback no arquivo hosts
     for ((i=1; i<=$var_qtd_hosts; i++)); do 
         printf '%s\n' "10.0.0.$i    node$i" | sudo tee --append /etc/hosts; done
-    printf '\n%s\n' 'showing /etc/hosts'
-    cat /etc/hosts
 }
 
 function ssh_file() {
@@ -128,12 +124,13 @@ function ssh_file() {
     for i in $(sudo -u mininet cat -n /home/mininet/.ssh/authorized_keys | awk '{print $1}'); do
         sudo -u mininet sed -Ei "${i}s/@.*/@node$i/" /home/mininet/.ssh/authorized_keys; done  		# mudando todos nomes de hosts do arquivo para "node" para facilitar modificação abaixo
 
+    printf '\n%s\n' 'showing /home/mininet/.ssh/authorized_keys'
+    sudo -u mininet cat /home/mininet/.ssh/authorized_keys
+    
     sudo -u mininet chmod 755 /home/mininet/.ssh/authorized_keys
     printf '%s\n' $'Host *\nStrictHostKeyChecking no' | \
 	sudo -u mininet tee --append /home/mininet/.ssh/config 						# configurando ssh para não verificar fingerprint
     sudo -u mininet chmod 400 /home/mininet/.ssh/config
-    printf '\n%s\n' 'showing /home/mininet/.ssh/authorized_keys'
-    cat /home/mininet/.ssh/authorized_keys
 }
 
 function node_file() {
@@ -156,7 +153,7 @@ function install_app_mininet() {
     printf '\e[1;33m%-6s%s\e[m\n' 'Installing Mininet in ' $BUILD_DIR/mininet
     sudo -u mininet git clone git://github.com/mininet/mininet $BUILD_DIR/mininet
     cd $BUILD_DIR/mininet
-    git checkout -b 2.2.2 2.2.2
+    sudo -u mininet git checkout -b 2.2.2 2.2.2
     printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
     sudo -u mininet sed -i -- 's/iproute/iproute2/g' $BUILD_DIR/mininet/util/install.sh
     sudo $BUILD_DIR/mininet/util/install.sh -a
@@ -204,7 +201,7 @@ function install_app_nps() {
     for ((i=2; i<=$var_qtd_hosts; i++)); do \
 	printf '%s\n' "10.0.0."$i" node"$i" mininet eth1 10.0.0.1 6633" | \
 	sudo -u mininet tee --append $BUILD_DIR/nps/config/nodelist.txt; done
-    cat $BUILD_DIR/nps/config/nodelist.txt
+    sudo -u mininet cat $BUILD_DIR/nps/config/nodelist.txt
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating clusternode MininetScripts directory in ' $BUILD_DIR/nps/clusternode/MininetScripts/
     sudo -u mininet mkdir -p $BUILD_DIR/nps/clusternode/MininetScripts/
@@ -234,7 +231,7 @@ function install_app_maxinet() {
     sudo sed -i -- 19,'$d' /etc/MaxiNet.cfg
     for ((i=2; i<=$var_qtd_hosts; i++)); do 
         printf '[node'$i$'] \nip = node'$i$' \nshare = 1\n\n' | sudo tee --append /etc/MaxiNet.cfg; done
-    cat /etc/MaxiNet.cfg    
+    sudo cat /etc/MaxiNet.cfg    
 }
 
 # set up build directory
