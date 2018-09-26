@@ -108,8 +108,6 @@ function hosts_file() {
 
 function ssh_file() {
     printf '\n\e[1;33m%-6s\e[m\n' '-- Configuring SSH...'
-    sudo sed -i -- 's/#AllowAgentForwarding yes/AllowAgentForwarding yes/g' /etc/ssh/sshd_config
-    sudo sed -i -- 's/#AllowTcpForwarding yes/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
     sudo sed -i -- 's/#PermitTunnel no/PermitTunnel yes/g' /etc/ssh/sshd_config
     
     printf '\n\e[1;33m%-6s\e[m\n' 'Creating and exchanging SSH key for "mininet" user'
