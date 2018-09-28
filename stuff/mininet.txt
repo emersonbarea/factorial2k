@@ -1,0 +1,506 @@
+comando: mn --topo tree,2,2 --cluster localhost,node2 --placement random
+
+
+# mn --topo tree,2,2 --cluster localhost,node2 --placement random
+---------------------------------------------------- EGG-INFO/scripts/mn: __main__
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def __init__
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def parseArgs
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def setup
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def begin
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def begin - if self.options.cluster
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+*** WARNING: Experimental cluster mode!
+*** Using RemoteHost, RemoteOVSSwitch, RemoteLink
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def findServerIP
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def findServerIP
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def precheck
+*** Checking servers
+node2 
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def buildFromTopo
+*** Placing nodes
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def placeNode
+---------------------------------------------------- mininet/scripts/cluster.py: Placer - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+h1:localhost ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+h2:localhost ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+h3:node2 ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+h4:node2 ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+s1:localhost ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+s2:localhost ---------------------------------------------------- mininet/scripts/cluster.py: RandomPlacer - def place
+s3:node2 
+*** Creating network
+*** Adding controller
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def addController
+*** Adding hosts:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h3 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h4 
+*** Adding switches:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s3 
+*** Adding links:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+(s1, s2) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeTunnel
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+(s1, s3) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s2, h1) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s2, h2) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s3, h3) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s3, h4) 
+*** Configuring hosts
+h1 h2 h3 h4 
+('#############---------------- mn = ', <mininet.examples.cluster.MininetCluster object at 0x7ff376376090>)
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+s2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+s3 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def batchStartup
+(localhost)...---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+(node2)...---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+
+*** Starting CLI:
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 h3 h4 
+h3 -> h1 h2 h4 
+h4 -> h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 6 links
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+
+*** Stopping 3 switches
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def batchShutdown
+(localhost)---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(node2)---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+s1 s2 s3 
+*** Stopping 4 hosts
+h1 h2 h3 h4 
+*** Done
+completed in 36.805 seconds
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+comando: mn --topo tree,2,2 --cluster localhost,node2
+
+
+# mn --topo tree,2,2 --cluster localhost,node2
+---------------------------------------------------- EGG-INFO/scripts/mn: __main__
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def __init__
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def parseArgs
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: def addDictOption
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def setup
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def begin
+---------------------------------------------------- EGG-INFO/scripts/mn: MininetRunner - def begin - if self.options.cluster
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+*** WARNING: Experimental cluster mode!
+*** Using RemoteHost, RemoteOVSSwitch, RemoteLink
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def findServerIP
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def findServerIP
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def precheck
+*** Checking servers
+node2 
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def buildFromTopo
+*** Placing nodes
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def placeNode
+---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: Placer - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def calculatePlacement
+---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def bin
+---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def bin
+---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+h1:localhost ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+h2:localhost ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+h3:node2 ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+h4:node2 ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+s1:localhost ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+s2:localhost ---------------------------------------------------- mininet/scripts/cluster.py: SwitchBinPlacer - def place
+s3:node2 
+*** Creating network
+*** Adding controller
+---------------------------------------------------- mininet/scripts/cluster.py: MininetCluster - def addController
+*** Adding hosts:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h3 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+h4 
+*** Adding switches:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: ClusterCleanup - def add
+---------------------------------------------------- mininet/scripts/cluster.py: def findUser
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def startShell
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def finishInit
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+s3 
+*** Adding links:
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+(s1, s2) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeTunnel
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+(s1, s3) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s2, h1) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s2, h2) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s3, h3) ---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def __init__
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def makeIntPair
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def addIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def moveIntf
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(s3, h4) 
+*** Configuring hosts
+h1 h2 h3 h4 
+('#############---------------- mn = ', <mininet.examples.cluster.MininetCluster object at 0x7f283e52b090>)
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+s2 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+s3 ---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def batchStartup
+(localhost)...---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+(node2)...---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+
+*** Starting CLI:
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 h3 h4 
+h3 -> h1 h2 h4 
+h4 -> h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 6 links
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+.---------------------------------------------------- mininet/scripts/cluster.py: RemoteLink - def stop
+
+*** Stopping 3 switches
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def batchShutdown
+(localhost)---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+(node2)---------------------------------------------------- mininet/scripts/cluster.py: RemoteOVSSwitch - def isOldOVS
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rcmd
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def rpopen
+---------------------------------------------------- mininet/scripts/cluster.py: RemoteMixin - def _popen
+s1 s2 s3 
+*** Stopping 4 hosts
+h1 h2 h3 h4 
+*** Done
+completed in 16.832 seconds
