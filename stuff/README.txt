@@ -20,3 +20,8 @@ Mininet.txt
 	e também do comando
 		mn --topo tree,2,2 --cluster localhost,node2
 	nessa ordem.
+
+O arquivo mininet-2.2.2-py2.7.egg deve ser colocado em /usr/local/lib/python2.7/dist-packages/
+Se fizer alguma mudança no egg, deverá "zipar" ele novamente com o seguinte procedimento:
+	cd /usr/local/lib/python2.7/dist-packages/teste
+	zip -r /usr/local/lib/python2.7/dist-packages/mininet-2.2.2-py2.7.egg *
