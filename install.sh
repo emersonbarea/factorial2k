@@ -153,7 +153,7 @@ function install_app_mininet() {
     cd $BUILD_DIR/mininet
     sudo -u mininet git checkout -b 2.3.0d4 2.3.0d4
     printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
-    sudo -u mininet sed -i -- 's/iproute/iproute2/g' $BUILD_DIR/mininet/util/install.sh
+    sudo -u mininet sed -i -- 's/iproute /iproute2 /g' $BUILD_DIR/mininet/util/install.sh
     sudo $BUILD_DIR/mininet/util/install.sh -a
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
