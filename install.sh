@@ -151,7 +151,8 @@ function install_app_mininet() {
     printf '\e[1;33m%-6s%s\e[m\n' 'Installing Mininet in ' $BUILD_DIR/mininet
     sudo -u mininet git clone git://github.com/mininet/mininet $BUILD_DIR/mininet
     cd $BUILD_DIR/mininet
-    sudo -u mininet git checkout -b 2.3.0d4 2.3.0d4
+    #sudo -u mininet git checkout -b 2.3.0d4 2.3.0d4
+    sudo -u mininet git checkout -b 2.2.2 2.2.2
     printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
     sudo -u mininet sed -i -- 's/iproute /iproute2 /g' $BUILD_DIR/mininet/util/install.sh
     sudo $BUILD_DIR/mininet/util/install.sh -a
