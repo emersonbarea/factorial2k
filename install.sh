@@ -103,7 +103,7 @@ function hosts_file() {
     sudo cp /dev/null /etc/hosts									# limpa arquivo hosts
     printf '%s\n' "127.0.0.1	localhost.localdomain	localhost" | sudo tee /etc/hosts		# cadastra loopback no arquivo hosts
     for ((i=1; i<=$var_qtd_hosts; i++)); do 
-        printf '%s\n' "10.0.0.$i    node$i" | sudo tee --append /etc/hosts; done
+        printf '%s\n' "192.168.254.$i    node$i" | sudo tee --append /etc/hosts; done
 }
 
 function ssh_file() {
@@ -197,7 +197,7 @@ function install_app_nps() {
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating node list in ' $BUILD_DIR/nps/config/nodelist.txt
     sudo -u mininet cp /dev/null $BUILD_DIR/nps/config/nodelist.txt
     for ((i=2; i<=$var_qtd_hosts; i++)); do \
-	printf '%s\n' "10.0.0."$i" node"$i" mininet eth1 10.0.0.1 6633" | \
+	printf '%s\n' "192.168.254."$i" node"$i" mininet eth1 192.168.254.1 6633" | \
 	sudo -u mininet tee --append $BUILD_DIR/nps/config/nodelist.txt; done
     sudo -u mininet cat $BUILD_DIR/nps/config/nodelist.txt
 
@@ -221,14 +221,14 @@ function install_app_maxinet() {
     sudo cp $BUILD_DIR/MaxiNet/share/MaxiNet-cfg-sample /etc/MaxiNet.cfg
     printf '\e[1;33m%-6s\e[m\n' 'Configuring MaxiNet config file.'
     sudo sed -i -- 's/password = HalloWelt/password = abc123/g' /etc/MaxiNet.cfg
-    sudo sed -i -- 's/controller = 192.168.123.1:6633/controller = node1:6633/g' /etc/MaxiNet.cfg
+    sudo sed -i -- 's/controller = 192.168.123.1:6633/controller = 192.168.254.1:6633/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/logLevel = INFO/logLevel = ERROR/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/sshuser = root/sshuser = mininet/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/usesudo = False/usesudo = True/g' /etc/MaxiNet.cfg
-    sudo sed -i -- 's/ip = 192.168.123.1/ip = node1/g' /etc/MaxiNet.cfg
+    sudo sed -i -- 's/ip = 192.168.123.1/ip = 192.168.254.1/g' /etc/MaxiNet.cfg
     sudo sed -i -- 19,'$d' /etc/MaxiNet.cfg
     for ((i=2; i<=$var_qtd_hosts; i++)); do 
-        printf '[node'$i$'] \nip = node'$i$' \nshare = 1\n\n' | sudo tee --append /etc/MaxiNet.cfg; done
+        printf '[node'$i$'] \nip = 192.168.254.'$i$' \nshare = 1\n\n' | sudo tee --append /etc/MaxiNet.cfg; done
     sudo cat /etc/MaxiNet.cfg    
 }
 
