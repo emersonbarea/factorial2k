@@ -206,7 +206,7 @@ function install_app_nps() {
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating node list in ' $BUILD_DIR/nps/config/nodelist.txt
     sudo -u mininet cp /dev/null $BUILD_DIR/nps/config/nodelist.txt
     for ((i=2; i<=$var_qtd_hosts; i++)); do \
-	printf '%s\n' "192.168.254."$i" node"$i" mininet eth1 192.168.254.1 6633" | \
+	printf '%s\n' "192.168.254."$i" node"$i" mininet eth1 192.168.254.1 6653" | \
 	sudo -u mininet tee --append $BUILD_DIR/nps/config/nodelist.txt; done
     sudo -u mininet cat $BUILD_DIR/nps/config/nodelist.txt
 
@@ -221,6 +221,7 @@ function install_app_maxinet() {
     printf '\n\e[1;32m%-6s\e[m\n' '-- Installing MaxiNet ...'
     printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
     sudo -H pip install --upgrade --force-reinstall -U Pyro4
+    sudo pip install ryu
 
     install_metis;
 
@@ -233,7 +234,7 @@ function install_app_maxinet() {
     sudo cp $BUILD_DIR/MaxiNet/share/MaxiNet-cfg-sample /etc/MaxiNet.cfg
     printf '\e[1;33m%-6s\e[m\n' 'Configuring MaxiNet config file.'
     sudo sed -i -- 's/password = HalloWelt/password = abc123/g' /etc/MaxiNet.cfg
-    sudo sed -i -- 's/controller = 192.168.123.1:6633/controller = 192.168.254.1:6633/g' /etc/MaxiNet.cfg
+    sudo sed -i -- 's/controller = 192.168.123.1:6633/controller = 192.168.254.1:6653/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/logLevel = INFO/logLevel = ERROR/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/sshuser = root/sshuser = mininet/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/usesudo = False/usesudo = True/g' /etc/MaxiNet.cfg
