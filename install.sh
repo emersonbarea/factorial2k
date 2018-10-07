@@ -240,7 +240,7 @@ function install_app_maxinet() {
     sudo sed -i -- 's/usesudo = False/usesudo = True/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/ip = 192.168.123.1/ip = 192.168.254.1/g' /etc/MaxiNet.cfg
     sudo sed -i -- 19,'$d' /etc/MaxiNet.cfg
-    for ((i=2; i<=$var_qtd_hosts; i++)); do 
+    for ((i=1; i<=$var_qtd_hosts; i++)); do 
         printf '[node'$i$'] \nip = 192.168.254.'$i$' \nshare = 1\n\n' | sudo tee --append /etc/MaxiNet.cfg; done
     sudo cat /etc/MaxiNet.cfg    
 }
@@ -274,7 +274,7 @@ printf '\n%s\n' 'Please, look for any trouble during installation process.' \
                 'You requested installation of the following applications:' \
 	        
 if [ "$var_app_mininet" = "" ] || [ "$var_app_mininet" = "Y" ] || [ "$var_app_mininet" = "y" ] ; then
-    printf '%s\n%s\n' ' - Mininet 2.3.0d4' ' - Mininet Cluster'
+    printf '%s\n%s\n' ' - Mininet 2.2.2' ' - Mininet Cluster'
 fi
 if [ "$var_app_nps" = "" ] || [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
     printf '%s\n' ' - Network Prototype Simulator (NPS)'
