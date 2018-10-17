@@ -179,6 +179,7 @@ function install_metis() {
 
 function install_app_nps() {
     printf '\n\e[1;32m%-6s\e[m\n' '-- Installing Network Prototype Simulator (NPS) ...'
+    printf '\n\e[1;32m%-6s\e[m\n' '-- Creating Control Node) ...'
     printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
     sudo apt install python-networkx python-matplotlib python-paramiko -y
     sudo apt install default-jdk git ant libgl1-mesa-dev freeglut3-dev libgstreamer1.0-dev libgstreamermm-1.0-dev libwebkitgtk-dev -y
@@ -192,7 +193,7 @@ function install_app_nps() {
 
     install_metis;
 
-    printf '\e[1;33m%-6s%s\e[m\n' 'Installing FloodLight in ' $BUILD_DIR/floodlight
+    printf '\e[1;33m%-6s%s\e[m\n' 'Installing Floodlight in ' $BUILD_DIR/floodlight
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     sudo -u mininet rm -rf $BUILD_DIR/floodlight* 2> /dev/null
     sudo -u mininet wget https://github.com/floodlight/floodlight/archive/v0.90.tar.gz -P $BUILD_DIR
@@ -200,8 +201,10 @@ function install_app_nps() {
     cd $BUILD_DIR/floodlight-0.90
     sudo ant
 
-    printf '\e[1;33m%-6s%s\e[m\n' 'Installing FloodLight in ' $BUILD_DIR/floodlight
-    sudo -H pip install --upgrade --force-reinstall -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
+    printf '\e[1;33m%-6s%s\e[m\n' 'Installing wxPython in ' $BUILD_DIR/wxPython
+    #sudo -H pip install --upgrade --force-reinstall -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
+    sudo -u mininet wget http://192.168.56.254/wxPython-4.0.3-cp27-cp27mu-linux_x86_64.whl -P $BUILD_DIR
+    sudo -H pip install --upgrade --force-reinstall -U $BUILD_DIR/wxPython-4.0.3-cp27-cp27mu-linux_x86_64.whl
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating node list in ' $BUILD_DIR/nps/config/nodelist.txt
     sudo -u mininet cp /dev/null $BUILD_DIR/nps/config/nodelist.txt
@@ -210,11 +213,14 @@ function install_app_nps() {
 	sudo -u mininet tee --append $BUILD_DIR/nps/config/nodelist.txt; done
     sudo -u mininet cat $BUILD_DIR/nps/config/nodelist.txt
 
-    printf '\e[1;33m%-6s%s\e[m\n' 'Creating clusternode MininetScripts directory in ' $BUILD_DIR/nps/clusternode/MininetScripts/
+    printf '\e[1;33m%-6s%s\e[m\n' 'Configuring NPS config file at ' $BUILD_DIR/nps/config/config_constants.py
+    sudo -u cp $FACTORIAL2K_DIR/NPS/config_constants.py $BUILD_DIR/nps/config/
+
+    printf '\n\e[1;32m%-6s\e[m\n' '-- Creating Cluster Node ...'
+    printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
+    sudo apt install python-scapy vim mc strace tcpdump netcat nmap -y
+    printf '\e[1;33m%-6s%s\e[m\n' 'Creating clusternode MininetScripts dir in ' $BUILD_DIR/nps/clusternode/MininetScripts/
     sudo -u mininet mkdir -p $BUILD_DIR/nps/clusternode/MininetScripts/
-
-# AINDA NÃO TERMINADO
-
 }
 
 function install_app_maxinet() {
