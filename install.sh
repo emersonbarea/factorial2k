@@ -145,13 +145,13 @@ function node_file() {
 }
 
 function install_app_mininet() {
-    printf '\n\e[1;33m%-6s\e[m\n' '-- Installing Mininet 2.3.0d4 ...'
+    printf '\n\e[1;33m%-6s\e[m\n' '-- Installing Mininet 2.2.2 ...'
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     sudo -u mininet rm -rf $BUILD_DIR/mininet 2> /dev/null
     printf '\e[1;33m%-6s%s\e[m\n' 'Installing Mininet in ' $BUILD_DIR/mininet
     sudo -u mininet git clone git://github.com/mininet/mininet $BUILD_DIR/mininet
     cd $BUILD_DIR/mininet
-    sudo -u mininet git checkout -b 2.3.0d4 2.3.0d4
+    sudo -u mininet git checkout -b 2.2.2 2.2.2
     printf '\n\e[1;33m%-6s\e[m\n' 'Fixing iproute Mininet issue (using iproute2)'
     sudo -u mininet sed -i -- 's/iproute /iproute2 /g' $BUILD_DIR/mininet/util/install.sh
     sudo $BUILD_DIR/mininet/util/install.sh -a
@@ -274,7 +274,7 @@ printf '\n%s\n' 'Please, look for any trouble during installation process.' \
                 'You requested installation of the following applications:' \
 	        
 if [ "$var_app_mininet" = "" ] || [ "$var_app_mininet" = "Y" ] || [ "$var_app_mininet" = "y" ] ; then
-    printf '%s\n%s\n' ' - Mininet 2.3.0d4' ' - Mininet Cluster'
+    printf '%s\n%s\n' ' - Mininet 2.2.2' ' - Mininet Cluster'
 fi
 if [ "$var_app_nps" = "" ] || [ "$var_app_nps" = "Y" ] || [ "$var_app_nps" = "y" ] ; then
     printf '%s\n' ' - Network Prototype Simulator (NPS)'
