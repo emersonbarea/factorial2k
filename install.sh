@@ -181,7 +181,7 @@ function install_app_nps() {
     printf '\n\e[1;32m%-6s\e[m\n' '-- Installing Network Prototype Simulator (NPS) ...'
     printf '\n\e[1;32m%-6s\e[m\n' '-- Creating Control Node) ...'
     printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
-    sudo apt install python-networkx python-matplotlib python-paramiko -y
+    sudo apt install python-networkx python-matplotlib python-paramiko libwebkitgtk-3.0 -y
     sudo apt install default-jdk git ant libgl1-mesa-dev freeglut3-dev libgstreamer1.0-dev libgstreamermm-1.0-dev libwebkitgtk-dev -y
     sudo apt autoremove -y
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
