@@ -214,7 +214,7 @@ function install_app_nps() {
     sudo -u mininet cat $BUILD_DIR/nps/config/nodelist.txt
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Configuring NPS config file at ' $BUILD_DIR/nps/config/config_constants.py
-    sudo -u cp $FACTORIAL2K_DIR/NPS/config_constants.py $BUILD_DIR/nps/config/
+    sudo -u mininet cp $LOCAL_DIR/NPS/config_constants.py $BUILD_DIR/nps/config/
 
     printf '\n\e[1;32m%-6s\e[m\n' '-- Creating Cluster Node ...'
     printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
