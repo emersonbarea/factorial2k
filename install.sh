@@ -71,7 +71,7 @@ function update_SO_install_packages() {
     sudo apt update
     sudo apt install language-pack-pt -y
     sudo apt upgrade -y
-    sudo apt install git vim htop ethtool sysfsutils python-pip python3-pip ifupdown mc strace tcpdump netcat nmap python-scapy whois -y
+    sudo apt install git vim htop ethtool sysfsutils python-pip python3-pip ifupdown mc strace tcpdump netcat nmap python-scapy whois iperf3 -y
 }
 
 function network_configuration() {
