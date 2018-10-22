@@ -72,6 +72,7 @@ function update_SO_install_packages() {
     sudo apt install language-pack-pt -y
     sudo apt upgrade -y
     sudo apt install git vim htop ethtool sysfsutils python-pip python3-pip ifupdown mc strace tcpdump netcat nmap python-scapy whois iperf3 -y
+    sudo pip install ryu
 }
 
 function network_configuration() {
@@ -227,7 +228,6 @@ function install_app_maxinet() {
     printf '\n\e[1;32m%-6s\e[m\n' '-- Installing MaxiNet ...'
     printf '\n\e[1;33m%-6s\e[m\n' 'Resolving requirements'
     sudo -H pip install --upgrade --force-reinstall -U Pyro4
-    sudo pip install ryu
 
     install_metis;
 
