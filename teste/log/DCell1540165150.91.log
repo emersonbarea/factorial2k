@@ -1,0 +1,12 @@
+RemoteSSHLink,[2]
+0.00395393371582,local,Create Mininet Topology
+0.0106019973755,local,Create local cell switches
+0.0210628509521,local,Create local hosts
+0.029757976532,local,Link hosts to cell switches
+0.0101418495178,local_remote,Link host to host
+RemoteGRELink,[2]
+0.000200986862183,local,Create Mininet Topology
+0.0182650089264,local,Create local cell switches
+0.0209600925446,local,Create local hosts
+0.040874004364,local,Link hosts to cell switches
+0.0152478218079,local_remote,Link host to host
