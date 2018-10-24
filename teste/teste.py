@@ -21,34 +21,39 @@ class MininetCluster(object):
         - hosts
         - links
     """
-    print('\n*** Using Mininet Cluster ***\n')
     def __init__(self, Link):
-        print('Creating Mininet network...\n')
+        print('\n*** Using Mininet Cluster ***\n')
+        print('\nCreating Mininet network...\n')
         self.net = Mininet(host=RemoteHost, link=Link, switch=RemoteOVSSwitch)
 
-    def controller(self, name, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
-        print('self.net.addController(c%s, controller=%s, ip=%s, port=%s' % (name, controllerType, controllerIP, controllerPort))
-        self.net.addController('c%s' % (name), controller=controllerType, ip=controllerIP, port=controllerPort)
+    def controller(self, controllerId, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
+        controllerName = ('c%s' % (controllerId))
+        print('self.net.addController(%s, controller=%s, ip=%s, port=%s' % (controllerName, controllerType, controllerIP, controllerPort))
+        self.net.addController(controllerName, controller=controllerType, ip=controllerIP, port=controllerPort)
 
-    def switch(self, name, clusterNode):
-        if clusterNode == 0: # if node1, just create a process
-            print('self.net.addSwitch(s%s)' % (name))
-            self.net.addSwitch('s%s' % (name))
+    def switch(self, switchId, clusterNodeId):
+        switchName = ('s%s' % (switchId))
+        clusterNodeName = ('node%s' % (clusterNodeId))
+        if clusterNodeName == 'node1': # if node1, just create a process
+            print('self.net.addSwitch(%s)' % (switchName))
+            self.net.addSwitch(switchName)
         else:
-            print('self.net.addSwitch(s%s, server = node%s)' % (name, clusterNode))
-            self.net.addSwitch('s%s' % (name), server = 'node%s' % (clusterNode))
+            print('self.net.addSwitch(%s, server = %s)' % (switchName, clusterNodeName))
+            self.net.addSwitch(switchName, server = clusterNodeName)
  
-    def host(self, name, switch, clusterNode):
-        if clusterNode == 0: # if node1, just create a process
-            print('self.net.addHost(h%s%s)' % (name, switch))
-            self.net.addHost('h%s%s' % (name, switch))
+    def host(self, hostId, switchId, clusterNodeId):
+        hostName = ('h%s_%s' % (switchId, hostId))
+        clusterNodeName = ('node%s' % (clusterNodeId))
+        if clusterNodeName == 'node1': # if node1, just create a process
+            print('self.net.addHost(%s)' % (hostName))
+            self.net.addHost(hostName)
         else:
-            print('self.net.addHost(h%s%s, server = node%s)' % (name, switch, clusterNode))
-            self.net.addHost('h%s%s' % (name, switch), server = 'node%s' % (clusterNode))
+            print('self.net.addHost(%s, server = %s)' % (hostName, clusterNodeName))
+            self.net.addHost(hostName, server = clusterNodeName)
 
-    def link(self, a, b):
-        print('self.addLink(%s,%s)' % (a, b))
-        self.net.addLink('%s' % (a),'%s' % (b))
+    def link(self, nodeNameA, nodeNameB):
+        print('self.addLink(%s,%s)' % (nodeNameA, nodeNameB))
+        self.net.addLink(nodeNameA, nodeNameB)
 
     def _start(self):
         self.net.start()
@@ -58,6 +63,7 @@ class MininetCluster(object):
 
     def _CLI(self):
         CLI(self.net)
+
 
 class MaxiNet(object):
     """
@@ -67,62 +73,97 @@ class MaxiNet(object):
         - hosts
         - links
     """
-    print('*** Using MaxiNet ***')
-    def __init__(self, Link):
-        print('Creating Mininet network...\n')
-        self.net = Mininet(host=RemoteHost, link=Link, switch=RemoteOVSSwitch)
+    def __init__(self, clusterNodesLength):
+        print('\n*** Using MaxiNet ***\n')
+        print('\nCreating Mininet network...\n')
+        topo = Topo()
+        cluster = maxinet.Cluster(minWorkers=1, maxWorkers=clusterNodesLength)
+        self.exp = maxinet.Experiment(cluster, topo, switch=OVSSwitch)
+        self.exp.setup()
 
-    def controller(self, name, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
-        print('self.net.addController(c%s, controller=%s, ip=%s, port=%s' % (name, controllerType, controllerIP, controllerPort))
-        self.net.addController('c%s' % (name), controller=controllerType, ip=controllerIP, port=controllerPort)
+    def switch(self, switchId, workerId):
+        switchName = ('s%s' % (switchId))
+        print('self.exp.addSwitch("%s", dpid="%s", wid=%s)' % (switchName, switchId, workerId))
+        self.exp.addSwitch(switchName, dpid=switchId, wid=workerId)
 
-    def switch(self, name, clusterNode):
-        if clusterNode == 0: # if node1, just create a process
-            print('self.net.addSwitch(s%s)' % (name))
-            self.net.addSwitch('s%s' % (name))
-        else:
-            print('self.net.addSwitch(s%s, server = node%s)' % (name, clusterNode))
-            self.net.addSwitch('s%s' % (name), server = 'node%s' % (clusterNode))
+    def host(self, hostId, switchId):
+        hostName = ('h%s_%s' % (switchId, hostId))
+        switchName = ('s%s' % (switchId))
+        print('self.exp.addHost("%s",ip=Tools.makeIP(%s), max=Tools.makeMAC(%s), pos="%s")' % (hostName, hostId, hostId, switchName))
+        self.exp.addHost("%s" % (hostName),ip=Tools.makeIP(int(hostId)), max=Tools.makeMAC(int(hostId)), pos="%s" % (switchName))
 
-    def host(self, name, switch, clusterNode):
-        if clusterNode == 0: # if node1, just create a process
-            print('self.net.addHost(h%s%s)' % (name, switch))
-            self.net.addHost('h%s%s' % (name, switch))
-        else:
-            print('self.net.addHost(h%s%s, server = node%s)' % (name, switch, clusterNode))
-            self.net.addHost('h%s%s' % (name, switch), server = 'node%s' % (clusterNode))
-
-    def link(self, a, b):
-        print('self.addLink(%s,%s)' % (a, b))
-        self.net.addLink('%s' % (a),'%s' % (b))
-
-    def _start(self):
-        self.net.start()
+    def link(self, nodeNameA, nodeNameB):
+        print('self.exp.addLink("%s", "%s", autoconf = True)' % (nodeNameA, nodeNameB))
+        self.exp.addLink(nodeNameA, nodeNameB, autoconf = True)
 
     def _stop(self):
-        self.net.stop()
+        self.exp.stop()
 
     def _CLI(self):
-        CLI(self.net)
+        maxinet.Experiment.CLI(self.exp, None, None)
 
 
+class Test(object):
+    """
+        basic test for Mininet and MaxiNet configuration
+    """
+    def __init__(self):
+        self.testMininetCluster()
+        self.testMaxiNet()
 
+    def testMininetCluster(self):
+        mcLink = 'RemoteSSHLink'
+        clusterNodeId = 1
+        controllerId = '1'
+        switchId = '1'
+        hostId = '1'
+        nodeNameA = 's1'
+        nodeNameB = 'h1_1'
 
+        mc = MininetCluster(eval(mcLink))
+        mc.controller(controllerId)
+        mc.switch(switchId, clusterNodeId)
+        mc.host(hostId, switchId, clusterNodeId)
+        mc.link(nodeNameA, nodeNameB)
 
+        hostId = '2'
+        nodeNameB = 'h1_2'
 
+        mc.host(hostId, switchId, clusterNodeId)
+        mc.link(nodeNameA, nodeNameB)
 
+        mc._start()
+        mc._CLI()
+        mc._stop()
 
+    def testMaxiNet(self):
+        workerId = 0
+        controllerId = '1'
+        switchId = '11999'
+        hostId = '1'
+        nodeNameA = 's11999'
+        nodeNameB = 'h11999_1'
 
+        mn = MaxiNet(clusterNodesLength)
+        #mn.controller(controllerId)
+        mn.switch(switchId, workerId)
+        mn.host(hostId, switchId)
+        mn.link(nodeNameA, nodeNameB)
 
+        hostId = '2'
+        nodeNameA = 's11999'
+        nodeNameB = 'h11999_2'
 
+        mn.host(hostId, switchId)
+        mn.link(nodeNameA, nodeNameB)
+
+        mn._CLI()
+        mn._stop()
 
 
 class TopologyLength(object):
     def __init__(self):
         self.welcome()
-        self.clusterNodesLength()
-        self.networkLength()
-        self.fatTreeDensity()
 
     def welcome(self):
         print( '\nThis program creates DCell and FatTree Topologies.\n\n \
@@ -181,8 +222,10 @@ class TopologyLength(object):
                 logging.error('Not a number')
         return(fatTreeNetworkDensity)
 
-
 if __name__ == '__main__':
+    """
+        PS.: Hosts and switches can't use number 0 in its names !!!
+    """
     setLogLevel('info')
     if os.getuid() != 0:
         logging.warning(' You are NOT root')
@@ -196,32 +239,9 @@ if __name__ == '__main__':
                 DCell
                 FatTree
         """
-        TopologyLength()
-      
-
-
-        switch=0
-        a='h00'
-        b='s0'
-        name=0
-        clusterNode=0
-        bw=10
-        delay=20
-        controllerIP=None
-        link='RemoteGRELink'
-
-
-
-        #mc = MininetCluster(eval(link))
-        #mc.controller(name)
-        #mc.switch(name, clusterNode)
-        #mc.host(name, switch, clusterNode)
-        #mc.link(a, b)
-              
-        #mc._start()
-        #mc._CLI()
-        #mc._stop()
-
-
-
-        mn = MaxiNet(eval(link))
+        tp = TopologyLength()
+        clusterNodesLength = tp.clusterNodesLength()
+        networkLength = tp.networkLength()
+        fatTreeDensity = tp.fatTreeDensity()
+     
+        Test()
