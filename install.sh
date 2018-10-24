@@ -158,6 +158,8 @@ function install_app_mininet() {
     sudo $BUILD_DIR/mininet/util/install.sh -a
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
+    print '\n\e[1;33m%-6s\e[m\n' 'Installing Multipath Ryu controller in ' $BUILD_DIR/mininet
+    sudo -u mininet git clone https://github.com/wildan2711/multipath $BUILD_DIR/mininet
 }
 
 function install_metis() {
@@ -296,3 +298,4 @@ printf '\n\e[1;32m%-6s\n%s\n%s\e[m\n' 'From now you need to use only the usernam
 printf '\n%s%d%s\n%s%s%s\n%s\n' 'Please, shutdown the VM, make ' $((var_qtd_hosts-1)) ' clones, start all of them, ' \
                                 'execute nodes configuration script stored in ' $FACTORIAL2K_DIR '/nodes/ (node1.sh, node2.sh ...) ' \
                                 'at the correspondent VM (clone) to finish network configuration.'
+printf '\n\e[1;32m%-6s Use: "sudo ryu-manager --observe-links ryu_multipath.py" command to run Ryu Multipath controller\n\n'
