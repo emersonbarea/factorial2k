@@ -89,7 +89,8 @@ function user() {
     printf '\n\e[1;33m%-6s\e[m\n' '-- Creating "mininet" user...'
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous "mininet" user data.'
     sudo userdel -r mininet 2> /dev/null								# apaga usuario mininet previamente cadastrado
-    sudo useradd -m -p $(mkpasswd -m sha-512 -S saltsalt -s <<< abc123) -s /bin/bash mininet		# cria usuario mininet
+    sudo useradd -m -p $(mkpasswd -m sha-512 -S saltsalt -s <<< abc123) -s /bin/bash mininet		# cria usuario minineti
+    sudo -u mininet mkdir -p $BUILD_DIR/log								# cria o diretorio de logs 
     printf '\e[1;32m%-6s\e[m\n' 'USERNAME:mininet'
     printf '\e[1;32m%-6s\e[m\n' 'PASSWORD:abc123'
     printf '\e[1;33m%-6s\e[m\n' 'Putting user "mininet" to sudoers'
