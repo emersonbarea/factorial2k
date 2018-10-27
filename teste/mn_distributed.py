@@ -24,16 +24,13 @@ class MininetCluster(object):
     def __init__(self, Link):
         print('\n*** Using Mininet Cluster ***\n')
         print('\nCreating Mininet network...\n')
-        self.net = Mininet(host=RemoteHost, link=Link, switch=RemoteOVSSwitch)
+        self.net = Mininet(host=RemoteHost, link=RemoteGRELink, switch=RemoteOVSSwitch)
 
-    def controller(self, controllerId, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
-        controllerName = ('c%s' % (controllerId))
+    def controller(self, controllerName, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
         print('self.net.addController(%s, controller=%s, ip=%s, port=%s' % (controllerName, controllerType, controllerIP, controllerPort))
         self.net.addController(controllerName, controller=controllerType, ip=controllerIP, port=controllerPort)
 
-    def switch(self, switchId, clusterNodeId):
-        switchName = ('s%s' % (switchId))
-        clusterNodeName = ('node%s' % (clusterNodeId))
+    def switch(self, switchName, clusterNodeName):
         if clusterNodeName == 'node1': # if node1, just create a process
             print('self.net.addSwitch(%s)' % (switchName))
             self.net.addSwitch(switchName)
@@ -41,9 +38,7 @@ class MininetCluster(object):
             print('self.net.addSwitch(%s, server = %s)' % (switchName, clusterNodeName))
             self.net.addSwitch(switchName, server = clusterNodeName)
  
-    def host(self, hostId, switchId, clusterNodeId):
-        hostName = ('h%s_%s' % (switchId, hostId))
-        clusterNodeName = ('node%s' % (clusterNodeId))
+    def host(self, hostName, clusterNodeName):
         if clusterNodeName == 'node1': # if node1, just create a process
             print('self.net.addHost(%s)' % (hostName))
             self.net.addHost(hostName)
@@ -68,7 +63,7 @@ class MininetCluster(object):
 class MaxiNet(object):
     """
         create MaxiNet:
-        - controller
+        - controller (PS.: controller is configured in /etc/MaxiNet.cfg)
         - switches
         - hosts
         - links
@@ -81,16 +76,13 @@ class MaxiNet(object):
         self.exp = maxinet.Experiment(cluster, topo, switch=OVSSwitch)
         self.exp.setup()
 
-    def switch(self, switchId, workerId):
-        switchName = ('s%s' % (switchId))
-        print('self.exp.addSwitch("%s", dpid="%s", wid=%s)' % (switchName, switchId, workerId))
-        self.exp.addSwitch(switchName, dpid=switchId, wid=workerId)
+    def switch(self, switchName, workerId):
+        print('self.exp.addSwitch("%s", wid=%s)' % (switchName, workerId))
+        self.exp.addSwitch(switchName, wid=workerId)
 
-    def host(self, hostId, switchId):
-        hostName = ('h%s_%s' % (switchId, hostId))
-        switchName = ('s%s' % (switchId))
-        print('self.exp.addHost("%s",ip=Tools.makeIP(%s), max=Tools.makeMAC(%s), pos="%s")' % (hostName, hostId, hostId, switchName))
-        self.exp.addHost("%s" % (hostName),ip=Tools.makeIP(int(hostId)), max=Tools.makeMAC(int(hostId)), pos="%s" % (switchName))
+    def host(self, hostName, switchName):
+        print('self.exp.addHost("%s", pos="%s")' % (hostName, switchName))
+        self.exp.addHost("%s" % (hostName), pos="%s" % (switchName))
 
     def link(self, nodeNameA, nodeNameB):
         print('self.exp.addLink("%s", "%s", autoconf = True)' % (nodeNameA, nodeNameB))
@@ -109,53 +101,95 @@ class Test(object):
     """
     def __init__(self):
         self.testMininetCluster()
-        self.testMaxiNet()
+        #self.testMaxiNet()
 
     def testMininetCluster(self):
         mcLink = 'RemoteSSHLink'
-        clusterNodeId = 1
-        controllerId = '1'
-        switchId = '1'
-        hostId = '1'
-        nodeNameA = 's1'
-        nodeNameB = 'h1_1'
+        clusterNodeName = 'node1'
+        controllerName = 'c0'
 
         mc = MininetCluster(eval(mcLink))
-        mc.controller(controllerId)
-        mc.switch(switchId, clusterNodeId)
-        mc.host(hostId, switchId, clusterNodeId)
+        mc.controller(controllerName)
+
+        switchName = 's10'
+        mc.switch(switchName, clusterNodeName)
+        switchName = 's200'
+        mc.switch(switchName, clusterNodeName)
+        switchName = 's211'
+        mc.switch(switchName, clusterNodeName)
+        switchName = 's300'
+        mc.switch(switchName, clusterNodeName)
+        switchName = 's311'
+        mc.switch(switchName, clusterNodeName)
+
+        nodeNameA = 's300'
+        nodeNameB = 's200'
         mc.link(nodeNameA, nodeNameB)
 
-        hostId = '2'
-        nodeNameB = 'h1_2'
-
-        mc.host(hostId, switchId, clusterNodeId)
+        nodeNameA = 's311'
+        nodeNameB = 's211'
         mc.link(nodeNameA, nodeNameB)
+
+        nodeNameA = 's200'
+        nodeNameB = 's10'
+        mc.link(nodeNameA, nodeNameB)
+
+        nodeNameA = 's211'
+        nodeNameB = 's10'
+        mc.link(nodeNameA, nodeNameB)
+
+        hostName = 'h00'
+        mc.host(hostName, clusterNodeName)
+        nodeNameA = 's300'
+        nodeNameB = 'h00'
+        mc.link(nodeNameA, nodeNameB)
+
+        hostName = 'h01'
+        mc.host(hostName, clusterNodeName)
+        nodeNameA = 's300'
+        nodeNameB = 'h01'
+        mc.link(nodeNameA, nodeNameB)
+
+
+        hostName = 'h11'
+        mc.host(hostName, clusterNodeName)
+        nodeNameA = 's311'
+        nodeNameB = 'h11'
+        mc.link(nodeNameA, nodeNameB)
+
+        #clusterNodeName = 'node1'
+        #for i in xrange(3,10):
+        #    hostName = 'h1_' + str(i)
+        #    nodeNameA = 's1'
+        #    nodeNameB = 'h1_' + str(i)
+
+        #    mc.host(hostName, clusterNodeName)
+        #    mc.link(nodeNameA, nodeNameB)
 
         mc._start()
         mc._CLI()
         mc._stop()
 
     def testMaxiNet(self):
-        workerId = 0
-        controllerId = '1'
-        switchId = '11999'
-        hostId = '1'
-        nodeNameA = 's11999'
-        nodeNameB = 'h11999_1'
+        workerId = 0 
+        switchName = 's3_7_31'
+        hostName = 'h_31_511'
+        nodeNameA = 's3_7_31'
+        nodeNameB = 'h_31_511'
 
         mn = MaxiNet(clusterNodesLength)
-        #mn.controller(controllerId)
-        mn.switch(switchId, workerId)
-        mn.host(hostId, switchId)
+        mn.switch(switchName, workerId)
+        mn.host(hostName, switchName)
         mn.link(nodeNameA, nodeNameB)
 
-        hostId = '2'
-        nodeNameA = 's11999'
-        nodeNameB = 'h11999_2'
+        
+        #for i in xrange(3,100):
+        #    hostName = 'h1_' + str(i)
+        #    nodeNameA = 's1'
+        #    nodeNameB = 'h1_' + str(i)
 
-        mn.host(hostId, switchId)
-        mn.link(nodeNameA, nodeNameB)
+        #    mn.host(hostName, switchName)
+        #    mn.link(nodeNameA, nodeNameB)
 
         mn._CLI()
         mn._stop()
@@ -207,21 +241,6 @@ class TopologyLength(object):
                 logging.error(' Not a number')
         return(networkLength)
 
-    def fatTreeDensity(self):
-        """
-            Input the number of hosts on each POD
-        """
-        fatTreeNetworkDensity = False
-        while not fatTreeNetworkDensity:
-            try:
-                fatTreeNetworkDensity = int(raw_input('Input the number of hosts on each POD (FatTree Density) : '))
-                if fatTreeNetworkDensity < 1:
-                    plogging.error(' Network length must be greater than 0')
-                    fatTreeNetworkDensity = False
-            except ValueError:
-                logging.error('Not a number')
-        return(fatTreeNetworkDensity)
-
 if __name__ == '__main__':
     """
         PS.: Hosts and switches can't use number 0 in its names !!!
@@ -242,6 +261,5 @@ if __name__ == '__main__':
         tp = TopologyLength()
         clusterNodesLength = tp.clusterNodesLength()
         networkLength = tp.networkLength()
-        fatTreeDensity = tp.fatTreeDensity()
      
         Test()
