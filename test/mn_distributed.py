@@ -12,6 +12,7 @@ from MaxiNet.tools import Tools
 
 import os
 import logging
+import time
 
 class MininetCluster(object):
     """
@@ -21,13 +22,18 @@ class MininetCluster(object):
         - hosts
         - links
     """
-    def __init__(self, Link):
+    def __init__(self, Link, timeStamp):
         print('\n*** Using Mininet Cluster ***\n')
         print('\nCreating Mininet network...\n')
-        self.net = Mininet(host=RemoteHost, link=RemoteGRELink, switch=RemoteOVSSwitch)
+        multiPathDir='/home/mininet/multipath/'
+        logPathDir='./log'
+        self.net = Mininet(host=RemoteHost, link=eval(Link), switch=RemoteOVSSwitch)
+        #os.system('sudo ryu-manager --observe-links %s/ryu_multipath.py > %s/ryu_multipath_%s_%s.log &' \
+        #        % (multiPathDir, logPathDir, Link, timeStamp))
 
     def controller(self, controllerName, controllerType=RemoteController, controllerIP='192.168.254.1', controllerPort=6653):
-        print('self.net.addController(%s, controller=%s, ip=%s, port=%s' % (controllerName, controllerType, controllerIP, controllerPort))
+        print('self.net.addController(%s, controller=%s, ip=%s, port=%s' \
+                % (controllerName, controllerType, controllerIP, controllerPort))
         self.net.addController(controllerName, controller=controllerType, ip=controllerIP, port=controllerPort)
 
     def switch(self, switchName, clusterNodeName):
@@ -52,9 +58,12 @@ class MininetCluster(object):
 
     def _start(self):
         self.net.start()
+        time.sleep(3)
+        self.net.start()
 
     def _stop(self):
         self.net.stop()
+        os.system('sudo pkill -9 ryu-manager')
 
     def _CLI(self):
         CLI(self.net)
