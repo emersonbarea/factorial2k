@@ -159,8 +159,8 @@ function install_app_mininet() {
     sudo $BUILD_DIR/mininet/util/install.sh -a
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
-    print '\n\e[1;33m%-6s\e[m\n' 'Installing Multipath Ryu controller in ' $BUILD_DIR/mininet
-    sudo -u mininet git clone https://github.com/wildan2711/multipath $BUILD_DIR/mininet
+    print '\n\e[1;33m%-6s\e[m\n' 'Installing SMOC Multipath POX controller in ' $BUILD_DIR/pox/ext
+    sudo -u mininet git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext
 }
 
 function install_metis() {
