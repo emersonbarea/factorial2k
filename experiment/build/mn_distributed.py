@@ -85,11 +85,9 @@ class MaxiNet(object):
 
     def workers(self, clusterNodeName):
         if clusterNodeName == 'node1': # if node1, create MaxiNetFrontendServer
-            print('MaxiNetFrontendServer &\nsudo MaxiNetWorker &')
             os.system('MaxiNetFrontendServer &')
             time.sleep(3)
-            os.system('sudo MaxiNetWorker &')
-            time.sleep(3)
+            os.system('MaxiNetWorker &')
         else:
             print('paramiko connecting in: %s - client.exec_command("sudo MaxiNetWorker &")' % (clusterNodeName))
             client = paramiko.SSHClient()
@@ -128,8 +126,7 @@ class MaxiNet(object):
 
     def _workers(self, clusterNodeName):
         if clusterNodeName == 'node1':
-            os.system('pgrep -f MaxiNetWorker | sudo xargs kill 2> /dev/null')
-            os.system('pgrep -f MaxiNetFrontendServer | sudo xargs kill 2> /dev/null;')
+            os.system('./build/killMaxiNet.sh')
         else:
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())

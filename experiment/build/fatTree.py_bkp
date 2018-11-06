@@ -560,7 +560,7 @@ class CreateArray(object):
         self.pod = networkLength                                                # Total number of PODs
         self.densityPod = (networkLength / 2) ** 2                              # Number of Hosts per POD
         self.coreSwitch = (networkLength / 2) ** 2                              # Total number of Core switches
-        self.aggregateSwitch = networkLength * networkLength / 2                # Total number of Aggregate switches
+        self.aggregateSwitch = networkLength*networkLength / 2                  # Total number of Aggregate switches
         self.edgeSwitch = networkLength * networkLength / 2                     # Total number of Edge switches
         self.hosts = self.densityPod * self.pod                                 # Total number of Hosts
         self.edgeSwitchPerPod = self.edgeSwitch / self.pod                      # Number of Edge switches per POD

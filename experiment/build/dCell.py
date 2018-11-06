@@ -23,14 +23,6 @@ class Mininet(object):
         self.linksHostHostSwitch, self.linksHostSwitchHostSwitch, self.linksHostCellSwitch = \
                 object_array.links(self.hostCellList, self.hostSwitchCellList)
 
-        print('Cells: ', self.cellSwitchList)
-        print('Hosts: ', self.hostCellList)
-        print('Host switches: ', self.hostSwitchCellList)
-        print('controllers: ', self.controllerList)
-        print('Links Host to Host switches: ', self.linksHostHostSwitch)
-        print('LInks Host switches to Host switches: ', self.linksHostSwitchHostSwitch)
-        print('Links Host to cell switches: ', self.linksHostCellSwitch)
-
         wf.line('\nLine structure:\n\
         - time: time spent on task execution (seconds)\n\
         - local memory: number of memory used to execute the task on local cluster node (bytes)\n\
