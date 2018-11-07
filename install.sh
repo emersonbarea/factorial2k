@@ -159,7 +159,7 @@ function install_app_mininet() {
     sudo $BUILD_DIR/mininet/util/install.sh -a
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
-    print '\n\e[1;33m%-6s\e[m\n' 'Installing SMOC Multipath POX controller in ' $BUILD_DIR/pox/ext
+    printf '\n\e[1;33m%-6s\e[m\n' 'Installing SMOC Multipath POX controller in ' $BUILD_DIR/pox/ext
     sudo git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext/smoc
 }
 
@@ -244,7 +244,7 @@ function install_app_maxinet() {
     printf '\e[1;33m%-6s\e[m\n' 'Configuring MaxiNet config file.'
     sudo sed -i -- 's/password = HalloWelt/password = abc123/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/controller = 192.168.123.1:6633/controller = 192.168.254.1:6633/g' /etc/MaxiNet.cfg
-    sudo sed -i -- 's/logLevel = INFO/logLevel = DEBUG/g' /etc/MaxiNet.cfg
+    sudo sed -i -- 's/logLevel = INFO/logLevel = ERROR/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/sshuser = root/sshuser = mininet/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/usesudo = False/usesudo = True/g' /etc/MaxiNet.cfg
     sudo sed -i -- 's/ip = 192.168.123.1/ip = 192.168.254.1/g' /etc/MaxiNet.cfg

@@ -88,6 +88,7 @@ class MaxiNet(object):
             os.system('MaxiNetFrontendServer &')
             time.sleep(3)
             os.system('MaxiNetWorker &')
+            time.sleep(3)
         else:
             print('paramiko connecting in: %s - client.exec_command("sudo MaxiNetWorker &")' % (clusterNodeName))
             client = paramiko.SSHClient()
