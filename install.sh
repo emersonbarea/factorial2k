@@ -160,7 +160,7 @@ function install_app_mininet() {
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
     print '\n\e[1;33m%-6s\e[m\n' 'Installing SMOC Multipath POX controller in ' $BUILD_DIR/pox/ext
-    sudo -u mininet git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext/smoc
+    sudo git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext/smoc
 }
 
 function install_metis() {
