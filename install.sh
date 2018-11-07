@@ -160,7 +160,7 @@ function install_app_mininet() {
     printf '\n\e[1;33m%-6s\e[m\n' 'Testing Mininet'
     sudo mn --test pingall
     print '\n\e[1;33m%-6s\e[m\n' 'Installing SMOC Multipath POX controller in ' $BUILD_DIR/pox/ext
-    sudo -u mininet git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext
+    sudo -u mininet git clone https://github.com/LunaticNeko/smoc.git $BUILD_DIR/pox/ext/smoc
 }
 
 function install_metis() {
@@ -170,8 +170,8 @@ function install_metis() {
     printf '\e[1;33m%-6s\e[m\n' 'Erasing all previous configuration.'
     sudo -u mininet rm -rf $BUILD_DIR/metis-5.1.0* 2> /dev/null
     
-    #sudo -u mininet wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz -P $BUILD_DIR
-    sudo -u mininet wget http://192.168.56.254/metis-5.1.0.tar.gz -P $BUILD_DIR
+    sudo -u mininet wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz -P $BUILD_DIR
+    #sudo -u mininet wget http://192.168.56.254/metis-5.1.0.tar.gz -P $BUILD_DIR
     
     sudo -u mininet tar -xvzf $BUILD_DIR/metis-5.1.0.tar.gz -C $BUILD_DIR
     cd $BUILD_DIR/metis-5.1.0
@@ -206,8 +206,8 @@ function install_app_nps() {
     sudo ant
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Installing wxPython in ' $BUILD_DIR/wxPython
-    #sudo -H pip install --upgrade --force-reinstall -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
-    sudo -u mininet wget http://192.168.56.254/wxPython-4.0.3-cp27-cp27mu-linux_x86_64.whl -P $BUILD_DIR
+    sudo -H pip install --upgrade --force-reinstall -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
+    #sudo -u mininet wget http://192.168.56.254/wxPython-4.0.3-cp27-cp27mu-linux_x86_64.whl -P $BUILD_DIR
     sudo -H pip install --upgrade --force-reinstall -U $BUILD_DIR/wxPython-4.0.3-cp27-cp27mu-linux_x86_64.whl
 
     printf '\e[1;33m%-6s%s\e[m\n' 'Creating node list in ' $BUILD_DIR/nps/config/nodelist.txt
