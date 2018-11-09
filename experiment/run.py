@@ -33,6 +33,21 @@ def experiment():
             logging.error('Not a number')
     return(experiment)
 
+def howManyTimes():
+    """
+        Input how many times do you want to execute this test
+    """
+    times = False
+    while not times:
+        try:
+            times = int(raw_input('How many times do you want to repeat topology creation : '))
+            if times < 1:
+                logging.error(' Please insert a number greater than 1')
+                times = False
+        except ValueError:
+            logging.error(' Not a number')
+    return(times)
+
 def clusterNodesLength():
     """
         Input the number of cluster nodes
@@ -93,11 +108,10 @@ if __name__ == '__main__':
         option = experiment()
         if option == 12:
             sys.exit(0)
+        howManyTimes = howManyTimes()
         clusterNodesLength = clusterNodesLength()
         networkLength = networkLength()
         arrayNetworkLength = arrayNetworkLength(networkLength, clusterNodesLength)
-        timeStamp = getTime(0)
-        logFile = './log/experiment_' + str(timeStamp) + '.log'
         sleepTime = 0
         sleepTimeMem = 0
         """
@@ -107,78 +121,111 @@ if __name__ == '__main__':
         if option == 1: 
             mininet = ['mc','mn']
             mclink = ['RemoteSSHLink','RemoteGRELink']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (2)  MaxiNet - FatTree and DCell
         elif option == 2:
             mininet = ['mn']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, None)
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, None)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, None)
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, None)
 
         # (3)  MaxiNet - FatTree
         elif option == 3:
             mininet = ['mn']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, None)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, None)
 
         # (4)  MaxiNet - DCell
         elif option == 4:
             mininet = ['mn']
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, None)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, None)
 
         # (5)  Mininet Cluster (SSH and GRE Remote link) - FatTree and DCell
         elif option == 5:
             mininet = ['mc']
             mclink = ['RemoteSSHLink','RemoteGRELink']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (6)  Mininet Cluster (SSH Remote link) - FatTree
         elif option == 6: 
             mininet = ['mc']
             mclink = ['RemoteSSHLink']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (7)  Mininet Cluster (GRE Remote link) - FatTree
         elif option == 7:    
             mininet = ['mc']
             mclink = ['RemoteGRELink']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
         
         # (8)  Mininet Cluster (SSH Remote link) - DCell
         elif option == 8: 
             mininet = ['mc']
             mclink = ['RemoteSSHLink']
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (9)  Mininet Cluster (GRE Remote link) - DCell
         elif option == 9:
             mininet = ['mc']
             mclink = ['RemoteGRELink']
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (10) Mininet Cluster (SSH and GRE Remote link) - FatTree
         elif option == 10:
             mininet = ['mc']
             mclink = ['RemoteSSHLink', 'RemoteGRELink']
-            FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
 
         # (11) Mininet Cluster (SSH and GRE Remote link) - DCell
         elif option == 11:
             mininet = ['mc']
             mclink = ['RemoteSSHLink', 'RemoteGRELink']
-            DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
-                    networkLength, arrayNetworkLength, mclink)
+            for i in range(howManyTimes):
+                timeStamp = getTime(0)
+                logFile = './log/experiment_' + str(timeStamp) + '.log'                
+                DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
+                        networkLength, arrayNetworkLength, mclink)
