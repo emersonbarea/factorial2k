@@ -17,6 +17,7 @@ def getMemRemote(Sleep, node):
     stdin, stdout, stderr = client.exec_command('echo -e "import psutil\nprint(psutil.virtual_memory()[4])" | python')
     for line in stdout:
         rMem  = line.strip('\n')
+    client.close()
     return(int(rMem))
 
 def getTime(Sleep):

@@ -112,8 +112,8 @@ if __name__ == '__main__':
         clusterNodesLength = clusterNodesLength()
         networkLength = networkLength()
         arrayNetworkLength = arrayNetworkLength(networkLength, clusterNodesLength)
-        sleepTime = 0
-        sleepTimeMem = 0
+        sleepTime = 1
+        sleepTimeMem = 3
         """
             mininet - mc = MininetCluster | mn = MaxiNet
         """
@@ -122,7 +122,7 @@ if __name__ == '__main__':
             mininet = ['mc','mn']
             mclink = ['RemoteSSHLink','RemoteGRELink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -134,7 +134,7 @@ if __name__ == '__main__':
         elif option == 2:
             mininet = ['mn']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -146,7 +146,7 @@ if __name__ == '__main__':
         elif option == 3:
             mininet = ['mn']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -156,7 +156,7 @@ if __name__ == '__main__':
         elif option == 4:
             mininet = ['mn']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -167,7 +167,7 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteSSHLink','RemoteGRELink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -180,7 +180,7 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteSSHLink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -191,7 +191,7 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteGRELink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -202,7 +202,7 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteSSHLink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -213,8 +213,8 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteGRELink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
-                timeStamp = getTime(0)
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
+		timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
                         networkLength, arrayNetworkLength, mclink)
@@ -224,7 +224,7 @@ if __name__ == '__main__':
             mininet = ['mc']
             mclink = ['RemoteSSHLink', 'RemoteGRELink']
             for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+                print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 FatTree.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \
@@ -234,8 +234,8 @@ if __name__ == '__main__':
         elif option == 11:
             mininet = ['mc']
             mclink = ['RemoteSSHLink', 'RemoteGRELink']
-            for i in range(howManyTimes):
-                print('----*** RODADA %s DE %s ***----' % (i + 1, howManyTimes + 1))
+	    for i in range(howManyTimes):
+		print('\x1b[6;30;42m----*** RODADA %s DE %s ***----\x1b[0m'% (i + 1, howManyTimes))
                 timeStamp = getTime(0)
                 logFile = './log/experiment_' + str(timeStamp) + '.log'                
                 DCell.Mininet(mininet, timeStamp, logFile, sleepTime, sleepTimeMem, clusterNodesLength, \

@@ -493,7 +493,7 @@ class Mininet(object):
                     rMem1 = rMem1 - rd.getMemRemote(self.sleepTimeMem, linksAggregateCoreClusterNodeSrc[i])
                     rMem2 = rMem2 - rd.getMemRemote(self.sleepTimeMem, linksAggregateCoreClusterNodeDst[y])
                     wf.stringAggregateCoreRemote(pTime, lMem, rMem1, rMem2, lProc, rProc1, rProc2, \
-                            linksAggregateCoreClusterNodeSrc[i], linksAggregateCoreClusterNodeSrc[y], amount, \
+                            linksAggregateCoreClusterNodeSrc[i], linksAggregateCoreClusterNodeDst[y], amount, \
                             'linkAggregateCore-remoteX-remoteX', self.logFile)
                     continue
                 """
@@ -525,7 +525,7 @@ class Mininet(object):
                     rProc1 = 2 * amount
                     rProc2 = 2 * amount
                     wf.stringAggregateCoreRemote(pTime, lMem, rMem1, rMem2, lProc, rProc1, rProc2, \
-                            linksAggregateCoreClusterNodeSrc[i], linksAggregateCoreClusterNodeSrc[y], amount, \
+                            linksAggregateCoreClusterNodeSrc[i], linksAggregateCoreClusterNodeDst[y], amount, \
                             'linkAggregateCore-remoteX-remoteY', self.logFile)
                     continue
         if mininet == 'mc':
