@@ -72,7 +72,7 @@ function update_SO_install_packages() {
     sudo apt install language-pack-pt -y
     sudo apt upgrade -y
     sudo apt install git vim htop ethtool sysfsutils python-pip python3-pip ifupdown mc strace tcpdump netcat nmap python-scapy whois iperf3 -y
-    sudo pip install ryu psutil paramiko
+    sudo pip install ryu psutil paramiko networkx
 }
 
 function network_configuration() {

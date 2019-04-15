@@ -1,0 +1,158 @@
+-- FATTREE --
+        -- cluster_nodes:2
+        -- array_cluster_nodes:[6, 6]
+        -- total_pod:12
+        -- total_switch_core:36
+        -- total_switch_aggregate:72
+        -- total_switch_edge:72
+        -- total_host:432
+        -- switch_aggregate_per_pod:6
+        -- switch_edge_per_pod:6
+        -- host_per_pod:36
+        -- switch_core_per_cluster_node:[['s10', 'node1', 0], ['s11', 'node1', 0], ['s12', 'node1', 0], ['s13', 'node1', 0], ['s14', 'node1', 0], ['s15', 'node1', 0], ['s16', 'node1', 0], ['s17', 'node1', 0], ['s18', 'node1', 0], ['s19', 'node1', 0], ['s110', 'node1', 0], ['s111', 'node1', 0], ['s112', 'node1', 0], ['s113', 'node1', 0], ['s114', 'node1', 0], ['s115', 'node1', 0], ['s116', 'node1', 0], ['s117', 'node1', 0], ['s118', 'node2', 1], ['s119', 'node2', 1], ['s120', 'node2', 1], ['s121', 'node2', 1], ['s122', 'node2', 1], ['s123', 'node2', 1], ['s124', 'node2', 1], ['s125', 'node2', 1], ['s126', 'node2', 1], ['s127', 'node2', 1], ['s128', 'node2', 1], ['s129', 'node2', 1], ['s130', 'node2', 1], ['s131', 'node2', 1], ['s132', 'node2', 1], ['s133', 'node2', 1], ['s134', 'node2', 1], ['s135', 'node2', 1]]
+        
+Line structure:
+        - time: time spent on task execution (seconds)
+        - local memory: number of memory used to execute the task on local cluster node (bytes)
+        - remote memory: number of memory used to execute the task on remote cluster node (bytes)
+        - local processes: number of persistent processes created to execute the task on local cluster node
+        - remote processes: number of persistent processes created to execute the task on remote cluster node
+        - cluster node: the name of the cluster node on which the task is running
+        - amount: amount of elements created (hosts, switches, links) on the task
+        - description: a description that describe the what the task does
+
+-<MininetCluster>-
+--<RemoteSSHLink>--
+0.00884604454041,118784,0,0,0,node1,0,topology
+0.0549681186676,1200128,0,1,0,node1,0,controller
+0.651006937027,17760256,0,18,0,node1,18,coreSwitch
+11.5458080769,28712960,54751232,36,72,node2,18,coreSwitch
+1.21535611153,21192704,0,36,0,node1,36,aggregateSwitch
+22.7990961075,63467520,110972928,72,144,node2,36,aggregateSwitch
+1.26412391663,22278144,0,36,0,node1,36,edgeSwitch
+22.8359920979,67063808,110546944,72,144,node2,36,edgeSwitch
+8.06139612198,309657600,0,216,0,node1,216,host
+136.783953905,641314816,960602112,432,864,node2,216,host
+2.67496705055,37486592,0,0,0,node1,216,linkHostEdge
+3.4400241375,0,31117312,0,0,node2,216,linkHostEdge
+3.35114717484,43634688,0,0,0,node1,216,linkEdgeAggregate
+3.56690597534,0,42070016,0,0,node2,216,linkEdgeAggregate
+1.68556785583,26386432,0,0,0,0,0,node1,node1,108,linkAggregateCore-local-local
+217.001548052,318689280,221634560,0,216,216,0,node1,node2,108,linkAggregateCore-local-remote
+219.499707937,379756544,224907264,0,216,216,0,node2,node1,108,linkAggregateCore-remote-local
+1.8937599659,6039326720,27443200,27840512,0,0,0,node2,node2,108,linkAggregateCore-remoteX-remoteX
+4.03341197968,2564096,0,0,0,node1,1,start
+-<MininetCluster>-
+--<RemoteGRELink>--
+0.000371217727661,64737280,0,0,0,node1,0,topology
+0.0467529296875,12673024,0,1,0,node1,0,controller
+0.617074012756,7417856,0,18,0,node1,18,coreSwitch
+11.5011808872,25415680,49700864,36,72,node2,18,coreSwitch
+1.32752680779,20615168,0,36,0,node1,36,aggregateSwitch
+22.6498639584,59383808,105598976,72,144,node2,36,aggregateSwitch
+1.32817101479,21172224,0,36,0,node1,36,edgeSwitch
+22.8864400387,63074304,107225088,72,144,node2,36,edgeSwitch
+8.38243603706,285356032,0,216,0,node1,216,host
+138.464473963,539353088,843612160,432,864,node2,216,host
+3.61857104301,24506368,0,0,0,node1,216,linkHostEdge
+4.65951418877,0,20725760,0,0,node2,216,linkHostEdge
+4.28433394432,26968064,0,0,0,node1,216,linkEdgeAggregate
+4.83244204521,0,31096832,0,0,node2,216,linkEdgeAggregate
+2.23646187782,9805824,0,0,0,0,0,node1,node1,108,linkAggregateCore-local-local
+439.817173958,28651520,81608704,0,216,216,0,node1,node2,108,linkAggregateCore-local-remote
+442.957213879,5677056,27553792,0,216,216,0,node2,node1,108,linkAggregateCore-remote-local
+2.67504811287,330296,15126528,16850944,0,0,0,node2,node2,108,linkAggregateCore-remoteX-remoteX
+3.97598218918,774144,0,0,0,node1,1,start
+-<MaxiNet>-
+6.01756191254,105250816,0,4,0,node1,2,MaxiNetFrontendServer
+3.57771801949,0,27762688,0,3,node2,1,MaxiNetWorker
+15.4897890091,11874304,0,0,0,node1,0,topology
+1.53183913231,85495808,0,18,0,node1,18,coreSwitch
+1.49441218376,135168,40660992,36,72,node2,18,coreSwitch
+3.69932389259,18087936,0,36,0,node1,36,aggregateSwitch
+3.66119003296,0,19173376,72,144,node2,36,aggregateSwitch
+4.66159081459,19984384,0,36,0,node1,36,edgeSwitch
+4.68939709663,8192,19554304,72,144,node2,36,edgeSwitch
+7.21832108498,294895616,0,216,0,node1,216,host
+7.46869206429,286720,295063552,432,864,node2,216,host
+41.0354499817,32952320,0,0,0,node1,216,linkHostEdge
+42.3424069881,0,27791360,0,0,node2,216,linkHostEdge
+194.108226061,48197632,0,0,0,node1,216,linkEdgeAggregate
+177.867861986,0,33669120,0,0,node2,216,linkEdgeAggregate
+118.566085815,23027712,0,0,0,0,0,node1,node1,108,linkAggregateCore-local-local
+195.970808983,13512704,11665408,0,216,216,0,node1,node2,108,linkAggregateCore-local-remote
+236.484506845,14794752,24489984,0,216,216,0,node2,node1,108,linkAggregateCore-remote-local
+174.857373953,147458,20017152,19140608,0,0,0,node2,node2,108,linkAggregateCore-remoteX-remoteX
+8.10623168945e-06,16384,0,0,0,node1,1,start
+-- DCELL --
+        -- total_cell:12
+        -- total_hosts:132
+        -- total_host_switches:132
+        -- hosts_per_cell:11
+        -- host_switches_per_cell:11
+
+
+Line structure:
+        - time: time spent on task execution (seconds)
+        - local memory: number of memory used to execute the task on local cluster node (bytes)
+        - remote memory: number of memory used to execute the task on remote cluster node (bytes)
+        - local processes: number of persistent processes created to execute the task on local cluster node
+        - remote processes: number of persistent processes created to execute the task on remote cluster node
+        - cluster node: the name of the cluster node on which the task is running
+        - amount: amount of elements created (hosts, switches, links) on the task
+        - description: a description that describe the what the task does
+
+-<MininetCluster>-
+--<RemoteSSHLink>--
+0.00021505355835,0,0,0,0,node1,0,topology
+0.0270409584045,118784,0,1,0,node1,0,controller
+0.222552061081,28672,0,6,0,node1,6,cellSwitch
+3.82304692268,7675904,18210816,12,24,node2,6,cellSwitch
+2.47234916687,83918848,0,66,0,node1,66,hostCell
+41.8929569721,117157888,249008128,132,264,node2,66,hostCell
+2.68757891655,37715968,0,66,0,node1,66,hostSwitchCell
+42.0261049271,133210112,202903552,132,264,node2,66,hostSwitchCell
+0.679479122162,10563584,0,0,0,node1,66,linkHostHostSwitch
+0.976640939713,0,7430144,0,0,node2,66,linkHostHostSwitch
+2.81452393532,11878400,0,0,0,node1,66,linkHostCellSwitch
+1.00798487663,0,8245248,0,0,node2,66,linkHostCellSwitch
+0.188647031784,1462272,0,0,0,0,0,node1,node1,15,linkHostSwitchHostSwitch-local-local
+69.692661047,74760192,74424320,0,70,70,0,node1,node2,35,linkHostSwitchHostSwitch-local-remote
+0.245369195938,7106723840,1601536,2265088,0,0,0,node2,node2,16,linkHostSwitchHostSwitch-remoteX-remoteX
+1.1397049427,1019904,0,0,0,node1,1,start
+-<MininetCluster>-
+--<RemoteGRELink>--
+0.000287055969238,21069824,0,0,0,node1,0,topology
+0.0400719642639,2359296,0,1,0,node1,0,controller
+0.265007972717,1417216,0,6,0,node1,6,cellSwitch
+3.96868801117,6008832,17186816,12,24,node2,6,cellSwitch
+2.94755411148,85237760,0,66,0,node1,66,hostCell
+43.7774949074,115372032,245366784,132,264,node2,66,hostCell
+3.09313297272,36605952,0,66,0,node1,66,hostSwitchCell
+44.1063528061,133201920,203812864,132,264,node2,66,hostSwitchCell
+1.17106080055,9203712,0,0,0,node1,66,linkHostHostSwitch
+1.34204006195,0,3571712,0,0,node2,66,linkHostHostSwitch
+5.32125592232,8540160,0,0,0,node1,66,linkHostCellSwitch
+1.31075501442,0,6475776,0,0,node2,66,linkHostCellSwitch
+0.298331022263,204800,0,0,0,0,0,node1,node1,15,linkHostSwitchHostSwitch-local-local
+143.167724133,503808,692224,0,70,70,0,node1,node2,35,linkHostSwitchHostSwitch-local-remote
+0.358835935593,1812,839680,163840,0,0,0,node2,node2,16,linkHostSwitchHostSwitch-remoteX-remoteX
+1.13337993622,1384448,0,0,0,node1,1,start
+-<MaxiNet>-
+6.01651501656,7475200,0,4,0,node1,2,MaxiNetFrontendServer
+3.60894083977,0,13557760,0,3,node2,1,MaxiNetWorker
+1.32170796394,798720,0,0,0,node1,0,topology
+0.604336023331,1388544,0,6,0,node1,6,cellSwitch
+0.526243925095,36864,3665920,12,24,node2,6,cellSwitch
+2.53634381294,80039936,0,66,0,node1,66,hostCell
+2.12284994125,8192,80437248,132,264,node2,66,hostCell
+8.45379400253,39444480,0,66,0,node1,66,hostSwitchCell
+6.8570330143,380928,30867456,132,264,node2,66,hostSwitchCell
+11.287304163,8372224,0,0,0,node1,66,linkHostHostSwitch
+8.31039786339,0,5734400,0,0,node2,66,linkHostHostSwitch
+30.3615999222,6602752,0,0,0,node1,66,linkHostCellSwitch
+22.0476920605,0,7483392,0,0,node2,66,linkHostCellSwitch
+7.50574803352,3112960,0,0,0,0,0,node1,node1,15,linkHostSwitchHostSwitch-local-local
+31.5404648781,2592768,2600960,0,70,70,0,node1,node2,35,linkHostSwitchHostSwitch-local-remote
+7.53002405167,1028,450560,716800,0,0,0,node2,node2,16,linkHostSwitchHostSwitch-remoteX-remoteX
+6.91413879395e-06,0,0,0,0,node1,1,start

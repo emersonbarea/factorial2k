@@ -112,7 +112,7 @@ if __name__ == '__main__':
         clusterNodesLength = clusterNodesLength()
         networkLength = networkLength()
         arrayNetworkLength = arrayNetworkLength(networkLength, clusterNodesLength)
-        sleepTime = 1
+        sleepTime = 0
         sleepTimeMem = 3
         """
             mininet - mc = MininetCluster | mn = MaxiNet

@@ -1,0 +1,17 @@
+6.02218103409,2932736,0,4,0,node1,2,MaxiNetFrontendServer
+3.67770004272,0,12206080,0,3,node2,1,MaxiNetWorker
+1.09695196152,2609152,0,0,0,node1,0,topology
+0.612307071686,24576,0,6,0,node1,6,cellSwitch
+0.588227033615,8192,458752,12,24,node2,6,cellSwitch
+2.54052305222,77459456,0,66,0,node1,66,hostCell
+2.41591191292,0,82190336,132,264,node2,66,hostCell
+8.5146548748,26677248,0,66,0,node1,66,hostSwitchCell
+8.1118311882,0,37892096,132,264,node2,66,hostSwitchCell
+11.3044261932,7729152,0,0,0,node1,66,linkHostHostSwitch
+10.882516861,0,5623808,0,0,node2,66,linkHostHostSwitch
+30.6518361568,7233536,0,0,0,node1,66,linkHostCellSwitch
+28.6566591263,0,7159808,0,0,node2,66,linkHostCellSwitch
+8.6131029129,2154496,0,0,0,0,0,node1,node1,15,linkHostSwitchHostSwitch-local-local
+36.0176670551,2461696,2854912,0,70,70,0,node1,node2,35,linkHostSwitchHostSwitch-local-remote
+9.88309001923,68634,77824,1953792,0,0,0,node2,node2,16,linkHostSwitchHostSwitch-remoteX-remoteX
+6.91413879395e-06,0,0,0,0,node1,1,start

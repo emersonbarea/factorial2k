@@ -61,8 +61,6 @@ class MininetCluster(object):
 
     def _start(self):
         self.net.start()
-        time.sleep(3)
-        self.net.start()
 
     def _stop(self):
         os.system('pgrep -f pox.py | sudo xargs kill 2> /dev/null')

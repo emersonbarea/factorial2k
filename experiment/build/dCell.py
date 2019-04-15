@@ -438,6 +438,7 @@ class Mininet(object):
                     - remote veth
                     - 0 local process - 0 remote process
                 """
+                lMem = rd.getMemLocal(self.sleepTimeMem)
                 rMem1 = rd.getMemRemote(self.sleepTimeMem, linksHostSwitchHostSwitchClusterNodeSrc[i])
                 rMem2 = rd.getMemRemote(self.sleepTimeMem, linksHostSwitchHostSwitchClusterNodeDst[y])
                 pTime = rd.getTime(self.sleepTime)
@@ -454,6 +455,7 @@ class Mininet(object):
                         remoteX_remoteX = True
                 if remoteX_remoteX:
                     pTime = rd.getTime(self.sleepTime) - pTime
+                    lMem = lMem - rd.getMemLocal(self.sleepTimeMem)
                     rMem1 = rMem1 - rd.getMemRemote(self.sleepTimeMem, linksHostSwitchHostSwitchClusterNodeSrc[i])
                     rMem2 = rMem2 - rd.getMemRemote(self.sleepTimeMem, linksHostSwitchHostSwitchClusterNodeDst[y])
                     wf.stringAggregateCoreRemote(pTime, lMem, rMem1, rMem2, lProc, rProc1, rProc2, \
@@ -493,9 +495,11 @@ class Mininet(object):
                             'linkHostSwitchHostSwitch-remoteX-remoteY', self.logFile)
                     continue
         if mininet == 'mc':
-            mc.controllerPox()
+            pass
+            #mc.controllerPox()
         elif mininet == 'mn':
-            mn.controllerPox()
+            pass
+            #mn.controllerPox()
         lMem = rd.getMemLocal(self.sleepTimeMem)
         pTime = rd.getTime(self.sleepTime)
         if mininet == 'mc':

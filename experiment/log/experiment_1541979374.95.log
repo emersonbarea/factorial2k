@@ -1,0 +1,273 @@
+-- FATTREE --
+        -- cluster_nodes:4
+        -- array_cluster_nodes:[1, 1, 1, 1]
+        -- total_pod:4
+        -- total_switch_core:4
+        -- total_switch_aggregate:8
+        -- total_switch_edge:8
+        -- total_host:16
+        -- switch_aggregate_per_pod:2
+        -- switch_edge_per_pod:2
+        -- host_per_pod:4
+        -- switch_core_per_cluster_node:[['s10', 'node1', 0], ['s11', 'node2', 1], ['s12', 'node3', 2], ['s13', 'node4', 3]]
+        
+Line structure:
+        - time: time spent on task execution (seconds)
+        - local memory: number of memory used to execute the task on local cluster node (bytes)
+        - remote memory: number of memory used to execute the task on remote cluster node (bytes)
+        - local processes: number of persistent processes created to execute the task on local cluster node
+        - remote processes: number of persistent processes created to execute the task on remote cluster node
+        - cluster node: the name of the cluster node on which the task is running
+        - amount: amount of elements created (hosts, switches, links) on the task
+        - description: a description that describe the what the task does
+
+-<MininetCluster>-
+--<RemoteSSHLink>--
+0.00902485847473,405504,0,0,0,node1,0,topology
+0.0550119876862,905216,0,1,0,node1,0,controller
+0.0583519935608,9351168,0,1,0,node1,1,coreSwitch
+0.715162038803,20480,4800512,2,4,node2,1,coreSwitch
+0.671950101852,57344,3637248,2,4,node3,1,coreSwitch
+0.674163103104,1097728,3784704,2,4,node4,1,coreSwitch
+0.0603809356689,4845568,0,2,0,node1,2,aggregateSwitch
+1.3065290451,1757184,4603904,4,8,node2,2,aggregateSwitch
+1.25572299957,2297856,5296128,4,8,node3,2,aggregateSwitch
+1.2703230381,3297280,6508544,4,8,node4,2,aggregateSwitch
+0.0637989044189,3989504,0,2,0,node1,2,edgeSwitch
+1.25307679176,512000,6176768,4,8,node2,2,edgeSwitch
+1.2336769104,2752512,7143424,4,8,node3,2,edgeSwitch
+1.24552488327,3346432,6987776,4,8,node4,2,edgeSwitch
+0.138923168182,7942144,0,4,0,node1,4,host
+2.50412487984,5267456,14098432,8,16,node2,4,host
+2.53605914116,5304320,14614528,8,16,node3,4,host
+2.59665799141,7118848,15175680,8,16,node4,4,host
+0.0499489307404,5021696,0,0,0,node1,4,linkHostEdge
+0.0644240379333,0,593920,0,0,node2,4,linkHostEdge
+0.0664460659027,0,204800,0,0,node3,4,linkHostEdge
+0.0590670108795,0,4096,0,0,node4,4,linkHostEdge
+0.0447838306427,2621440,0,0,0,node1,4,linkEdgeAggregate
+0.0557990074158,0,1847296,0,0,node2,4,linkEdgeAggregate
+0.0582599639893,0,1458176,0,0,node3,4,linkEdgeAggregate
+0.054680109024,0,770048,0,0,node4,4,linkEdgeAggregate
+0.0137660503387,872448,0,0,0,0,0,node1,node1,1,linkAggregateCore-local-local
+1.93086504936,647168,724992,0,2,2,0,node1,node2,1,linkAggregateCore-local-remote
+1.94706511497,1863680,1122304,0,2,2,0,node1,node3,1,linkAggregateCore-local-remote
+1.97956395149,1253376,2060288,0,2,2,0,node1,node4,1,linkAggregateCore-local-remote
+1.94955897331,28672,2502656,0,2,2,0,node2,node1,1,linkAggregateCore-remote-local
+0.0162332057953,2832,696320,360448,0,0,0,node2,node2,1,linkAggregateCore-remoteX-remoteX
+3.79224085808,589824,3751936,2076672,2,2,2,node2,node3,1,linkAggregateCore-remoteX-remoteY
+3.68105602264,3321856,1384448,1163264,2,2,2,node2,node4,1,linkAggregateCore-remoteX-remoteY
+1.89058113098,135168,1482752,0,2,2,0,node3,node1,1,linkAggregateCore-remote-local
+3.79716801643,2105344,3563520,2555904,2,2,2,node3,node2,1,linkAggregateCore-remoteX-remoteY
+0.0151228904724,2608,708608,77824,0,0,0,node3,node3,1,linkAggregateCore-remoteX-remoteX
+3.73212099075,1114112,1785856,2801664,2,2,2,node3,node4,1,linkAggregateCore-remoteX-remoteY
+1.87466788292,528384,1601536,0,2,2,0,node4,node1,1,linkAggregateCore-remote-local
+3.84344601631,1617920,3133440,1941504,2,2,2,node4,node2,1,linkAggregateCore-remoteX-remoteY
+3.7196149826,1957888,1925120,1167360,2,2,2,node4,node3,1,linkAggregateCore-remoteX-remoteY
+0.0221741199493,832,1032192,946176,0,0,0,node4,node4,1,linkAggregateCore-remoteX-remoteX
+1.38301110268,82276352,0,0,0,node1,1,start
+-<MininetCluster>-
+--<RemoteGRELink>--
+0.000331878662109,8192,0,0,0,node1,0,topology
+0.0372269153595,1126400,0,1,0,node1,0,controller
+0.0304660797119,991232,0,1,0,node1,1,coreSwitch
+0.6965239048,184320,1671168,2,4,node2,1,coreSwitch
+0.678374052048,1445888,2777088,2,4,node3,1,coreSwitch
+0.707489967346,176128,950272,2,4,node4,1,coreSwitch
+0.0642750263214,3977216,0,2,0,node1,2,aggregateSwitch
+1.26717710495,1368064,6774784,4,8,node2,2,aggregateSwitch
+1.2474257946,2519040,4698112,4,8,node3,2,aggregateSwitch
+1.24153518677,1994752,5160960,4,8,node4,2,aggregateSwitch
+0.0613479614258,3678208,0,2,0,node1,2,edgeSwitch
+1.31260108948,1122304,4456448,4,8,node2,2,edgeSwitch
+1.26151299477,4042752,5226496,4,8,node3,2,edgeSwitch
+1.29825782776,2527232,5787648,4,8,node4,2,edgeSwitch
+0.128257036209,6586368,0,4,0,node1,4,host
+2.55025792122,3887104,13434880,8,16,node2,4,host
+2.59824299812,5681152,14802944,8,16,node3,4,host
+2.50634384155,7348224,13565952,8,16,node4,4,host
+0.059159040451,4980736,0,0,0,node1,4,linkHostEdge
+0.0738310813904,0,8192,0,0,node2,4,linkHostEdge
+0.0826461315155,0,1200128,0,0,node3,4,linkHostEdge
+0.0775120258331,0,1863680,0,0,node4,4,linkHostEdge
+0.0616021156311,24576,0,0,0,node1,4,linkEdgeAggregate
+0.071182012558,0,1343488,0,0,node2,4,linkEdgeAggregate
+0.076896905899,0,20480,0,0,node3,4,linkEdgeAggregate
+0.076947927475,0,684032,0,0,node4,4,linkEdgeAggregate
+0.0203320980072,593920,0,0,0,0,0,node1,node1,1,linkAggregateCore-local-local
+3.78991007805,933888,307200,0,2,2,0,node1,node2,1,linkAggregateCore-local-remote
+3.83067202568,761856,860160,0,2,2,0,node1,node3,1,linkAggregateCore-local-remote
+3.80202293396,1597440,196608,0,2,2,0,node1,node4,1,linkAggregateCore-local-remote
+3.77652001381,389120,1368064,0,2,2,0,node2,node1,1,linkAggregateCore-remote-local
+0.0249660015106,2128,745472,294912,0,0,0,node2,node2,1,linkAggregateCore-remoteX-remoteX
+7.46142506599,954368,565248,790528,2,2,2,node2,node3,1,linkAggregateCore-remoteX-remoteY
+7.34389591217,212992,176128,204800,2,2,2,node2,node4,1,linkAggregateCore-remoteX-remoteY
+3.84665799141,1798144,643072,0,2,2,0,node3,node1,1,linkAggregateCore-remote-local
+7.52511191368,851968,266240,1073152,2,2,2,node3,node2,1,linkAggregateCore-remoteX-remoteY
+0.0292718410492,9632,860160,745472,0,0,0,node3,node3,1,linkAggregateCore-remoteX-remoteX
+7.55511784554,856064,917504,569344,2,2,2,node3,node4,1,linkAggregateCore-remoteX-remoteY
+3.83782100677,1277952,1110016,0,2,2,0,node4,node1,1,linkAggregateCore-remote-local
+7.45821690559,73728,479232,245760,2,2,2,node4,node2,1,linkAggregateCore-remoteX-remoteY
+7.4713280201,4055040,950272,204800,2,2,2,node4,node3,1,linkAggregateCore-remoteX-remoteY
+0.0215208530426,5824,557056,737280,0,0,0,node4,node4,1,linkAggregateCore-remoteX-remoteX
+1.10400485992,34480128,0,0,0,node1,1,start
+-<MaxiNet>-
+6.01562285423,30138368,0,4,0,node1,2,MaxiNetFrontendServer
+3.61195206642,0,20791296,0,3,node2,1,MaxiNetWorker
+3.61184310913,0,23736320,0,3,node3,1,MaxiNetWorker
+3.63465499878,0,24485888,0,3,node4,1,MaxiNetWorker
+29.0601379871,499712,0,0,0,node1,0,topology
+0.123876094818,36028416,0,1,0,node1,1,coreSwitch
+0.135503053665,0,983040,2,4,node2,1,coreSwitch
+0.132443189621,389120,1482752,2,4,node3,1,coreSwitch
+0.115041017532,0,33157120,2,4,node4,1,coreSwitch
+0.149072885513,315392,0,2,0,node1,2,aggregateSwitch
+0.166646957397,0,573440,4,8,node2,2,aggregateSwitch
+0.161217927933,0,2363392,4,8,node3,2,aggregateSwitch
+0.158528089523,0,1015808,4,8,node4,2,aggregateSwitch
+0.150613069534,2015232,0,2,0,node1,2,edgeSwitch
+0.175472974777,0,155648,4,8,node2,2,edgeSwitch
+0.17590713501,0,45056,4,8,node3,2,edgeSwitch
+0.158508062363,0,593920,4,8,node4,2,edgeSwitch
+0.142773866653,5144576,0,4,0,node1,4,host
+0.147378921509,0,307200,8,16,node2,4,host
+0.147716999054,0,540672,8,16,node3,4,host
+0.128265857697,110592,4157440,8,16,node4,4,host
+0.188291072845,462848,0,0,0,node1,4,linkHostEdge
+0.19141292572,0,364544,0,0,node2,4,linkHostEdge
+0.199472904205,0,282624,0,0,node3,4,linkHostEdge
+0.19969701767,0,1994752,0,0,node4,4,linkHostEdge
+0.249275922775,1122304,0,0,0,node1,4,linkEdgeAggregate
+0.24725484848,0,1282048,0,0,node2,4,linkEdgeAggregate
+0.244770050049,0,299008,0,0,node3,4,linkEdgeAggregate
+0.243120908737,0,393216,0,0,node4,4,linkEdgeAggregate
+0.0701739788055,839680,0,0,0,0,0,node1,node1,1,linkAggregateCore-local-local
+0.358303070068,507904,204800,0,2,2,0,node1,node2,1,linkAggregateCore-local-remote
+0.351963996887,65536,512000,0,2,2,0,node1,node3,1,linkAggregateCore-local-remote
+0.338449001312,270336,1544192,0,2,2,0,node1,node4,1,linkAggregateCore-local-remote
+0.33793592453,421888,159744,0,2,2,0,node2,node1,1,linkAggregateCore-remote-local
+0.0707499980927,4416,1552384,159744,0,0,0,node2,node2,1,linkAggregateCore-remoteX-remoteX
+0.327977895737,0,962560,282624,2,2,2,node2,node3,1,linkAggregateCore-remoteX-remoteY
+0.320230960846,0,823296,712704,2,2,2,node2,node4,1,linkAggregateCore-remoteX-remoteY
+0.341058015823,524288,598016,0,2,2,0,node3,node1,1,linkAggregateCore-remote-local
+0.343482017517,0,487424,147456,2,2,2,node3,node2,1,linkAggregateCore-remoteX-remoteY
+0.0721089839935,0832,1597440,1855488,0,0,0,node3,node3,1,linkAggregateCore-remoteX-remoteX
+0.345594167709,0,688128,77824,2,2,2,node3,node4,1,linkAggregateCore-remoteX-remoteY
+0.321913957596,327680,327680,0,2,2,0,node4,node1,1,linkAggregateCore-remote-local
+0.357806921005,0,503808,790528,2,2,2,node4,node2,1,linkAggregateCore-remoteX-remoteY
+0.341763019562,0,1986560,724992,2,2,2,node4,node3,1,linkAggregateCore-remoteX-remoteY
+0.0683250427246,6752,1265664,180224,0,0,0,node4,node4,1,linkAggregateCore-remoteX-remoteX
+8.10623168945e-06,0,0,0,0,node1,1,start
+-- DCELL --
+        -- total_cell:4
+        -- total_hosts:12
+        -- total_host_switches:12
+        -- hosts_per_cell:3
+        -- host_switches_per_cell:3
+
+
+Line structure:
+        - time: time spent on task execution (seconds)
+        - local memory: number of memory used to execute the task on local cluster node (bytes)
+        - remote memory: number of memory used to execute the task on remote cluster node (bytes)
+        - local processes: number of persistent processes created to execute the task on local cluster node
+        - remote processes: number of persistent processes created to execute the task on remote cluster node
+        - cluster node: the name of the cluster node on which the task is running
+        - amount: amount of elements created (hosts, switches, links) on the task
+        - description: a description that describe the what the task does
+
+-<MininetCluster>-
+--<RemoteSSHLink>--
+0.000326156616211,0,0,0,0,node1,0,topology
+0.0357828140259,86016,0,1,0,node1,0,controller
+0.0351479053497,1437696,0,1,0,node1,1,cellSwitch
+0.66715502739,339968,3452928,2,4,node2,1,cellSwitch
+0.620330810547,258048,2543616,2,4,node3,1,cellSwitch
+0.662415981293,311296,2007040,2,4,node4,1,cellSwitch
+0.100487947464,5681152,0,3,0,node1,3,hostCell
+1.96333003044,3584000,9580544,6,12,node2,3,hostCell
+1.89053177834,4468736,10223616,6,12,node3,3,hostCell
+1.95700883865,5238784,10412032,6,12,node4,3,hostCell
+0.103757143021,2076672,0,3,0,node1,3,hostSwitchCell
+2.00822496414,3481600,8654848,6,12,node2,3,hostSwitchCell
+1.95623707771,4468736,8974336,6,12,node3,3,hostSwitchCell
+1.92868900299,4882432,8949760,6,12,node4,3,hostSwitchCell
+0.0321140289307,5074944,0,0,0,node1,3,linkHostHostSwitch
+0.0423679351807,0,139264,0,0,node2,3,linkHostHostSwitch
+0.0421371459961,0,1310720,0,0,node3,3,linkHostHostSwitch
+0.0458190441132,0,651264,0,0,node4,3,linkHostHostSwitch
+0.0343790054321,675840,0,0,0,node1,3,linkHostCellSwitch
+0.0423510074615,0,516096,0,0,node2,3,linkHostCellSwitch
+0.0409450531006,0,131072,0,0,node3,3,linkHostCellSwitch
+0.0395731925964,0,757760,0,0,node4,3,linkHostCellSwitch
+1.9260840416,167936,1646592,0,2,2,0,node1,node2,1,linkHostSwitchHostSwitch-local-remote
+1.90775203705,1703936,1429504,0,2,2,0,node1,node3,1,linkHostSwitchHostSwitch-local-remote
+1.87533092499,1781760,524288,0,2,2,0,node1,node4,1,linkHostSwitchHostSwitch-local-remote
+3.6984770298,700416,2813952,1122304,2,2,2,node2,node3,1,linkHostSwitchHostSwitch-remoteX-remoteY
+3.68483114243,1064960,3047424,1200128,2,2,2,node2,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+3.77356290817,999424,2916352,2007040,2,2,2,node3,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+0.886339902878,38084608,0,0,0,node1,1,start
+-<MininetCluster>-
+--<RemoteGRELink>--
+0.000386953353882,0,0,0,0,node1,0,topology
+0.0351231098175,770048,0,1,0,node1,0,controller
+0.0334000587463,692224,0,1,0,node1,1,cellSwitch
+0.633701086044,339968,3063808,2,4,node2,1,cellSwitch
+0.669152975082,1970176,3133440,2,4,node3,1,cellSwitch
+0.664525985718,204800,1880064,2,4,node4,1,cellSwitch
+0.098888874054,4452352,0,3,0,node1,3,hostCell
+1.88984513283,2822144,9949184,6,12,node2,3,hostCell
+1.87415599823,3837952,10063872,6,12,node3,3,hostCell
+1.89843606949,5107712,10547200,6,12,node4,3,hostCell
+0.0997219085693,3424256,0,3,0,node1,3,hostSwitchCell
+1.90809702873,3735552,8843264,6,12,node2,3,hostSwitchCell
+1.94346618652,4763648,8704000,6,12,node3,3,hostSwitchCell
+1.88672018051,5160960,8511488,6,12,node4,3,hostSwitchCell
+0.0466320514679,2768896,0,0,0,node1,3,linkHostHostSwitch
+0.0670781135559,0,888832,0,0,node2,3,linkHostHostSwitch
+0.0613889694214,0,1150976,0,0,node3,3,linkHostHostSwitch
+0.0600838661194,0,983040,0,0,node4,3,linkHostHostSwitch
+0.0490219593048,1077248,0,0,0,node1,3,linkHostCellSwitch
+0.0560529232025,0,483328,0,0,node2,3,linkHostCellSwitch
+0.0601401329041,0,65536,0,0,node3,3,linkHostCellSwitch
+0.0602381229401,0,1712128,0,0,node4,3,linkHostCellSwitch
+3.85427498817,1978368,434176,0,2,2,0,node1,node2,1,linkHostSwitchHostSwitch-local-remote
+3.79821109772,20480,299008,0,2,2,0,node1,node3,1,linkHostSwitchHostSwitch-local-remote
+3.82994794846,425984,1310720,0,2,2,0,node1,node4,1,linkHostSwitchHostSwitch-local-remote
+7.43450021744,0,266240,1253376,2,2,2,node2,node3,1,linkHostSwitchHostSwitch-remoteX-remoteY
+7.52493405342,729088,573440,1552384,2,2,2,node2,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+7.49960803986,1736704,909312,507904,2,2,2,node3,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+0.873258829117,34238464,0,0,0,node1,1,start
+-<MaxiNet>-
+6.01521086693,24788992,0,4,0,node1,2,MaxiNetFrontendServer
+3.57690501213,0,13877248,0,3,node2,1,MaxiNetWorker
+3.60933899879,0,14331904,0,3,node3,1,MaxiNetWorker
+3.60869288445,0,13840384,0,3,node4,1,MaxiNetWorker
+1.67166900635,1708032,0,0,0,node1,0,topology
+0.115926027298,36302848,0,1,0,node1,1,cellSwitch
+0.132946968079,0,1073152,2,4,node2,1,cellSwitch
+0.142002820969,0,335872,2,4,node3,1,cellSwitch
+0.116670846939,0,34934784,2,4,node4,1,cellSwitch
+0.107079982758,4083712,0,3,0,node1,3,hostCell
+0.122563838959,0,1040384,6,12,node2,3,hostCell
+0.114053010941,126976,327680,6,12,node3,3,hostCell
+0.100563049316,0,1388544,6,12,node4,3,hostCell
+0.223145961761,1097728,0,3,0,node1,3,hostSwitchCell
+0.229182958603,0,1355776,6,12,node2,3,hostSwitchCell
+0.229923009872,16384,499712,6,12,node3,3,hostSwitchCell
+0.234303951263,0,1789952,6,12,node4,3,hostSwitchCell
+0.132756948471,1081344,0,0,0,node1,3,linkHostHostSwitch
+0.136819839478,0,65536,0,0,node2,3,linkHostHostSwitch
+0.143532037735,0,1433600,0,0,node3,3,linkHostHostSwitch
+0.129861116409,0,798720,0,0,node4,3,linkHostHostSwitch
+0.180501937866,229376,0,0,0,node1,3,linkHostCellSwitch
+0.177808046341,0,249856,0,0,node2,3,linkHostCellSwitch
+0.183975934982,0,450560,0,0,node3,3,linkHostCellSwitch
+0.178884983063,0,1138688,0,0,node4,3,linkHostCellSwitch
+0.337466001511,446464,880640,0,2,2,0,node1,node2,1,linkHostSwitchHostSwitch-local-remote
+0.340489864349,417792,557056,0,2,2,0,node1,node3,1,linkHostSwitchHostSwitch-local-remote
+0.324379205704,475136,438272,0,2,2,0,node1,node4,1,linkHostSwitchHostSwitch-local-remote
+0.329996109009,0,1130496,937984,2,2,2,node2,node3,1,linkHostSwitchHostSwitch-remoteX-remoteY
+0.333076953888,0,1630208,299008,2,2,2,node2,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+0.337941884995,0,106496,561152,2,2,2,node3,node4,1,linkHostSwitchHostSwitch-remoteX-remoteY
+1.00135803223e-05,0,0,0,0,node1,1,start
